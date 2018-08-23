@@ -1,0 +1,33 @@
+# stash of qt
+*.stash
+
+# swap files
+*.swp
+
+# obj files
+*.o
+
+# debug files
+*.su
+
+# binaries
+*.bin
+*.elf
+
+# linker map
+*.map
+
+# info of includes files for make
+*.d
+
+# lists
+*.lst
+
+# python compiled files
+*.pyc
+
+# log files
+*.log
+
+bundle/
+!plugins.sh
