@@ -8,11 +8,13 @@ execute pathogen#infect()
 autocmd BufNewFile  *.m	       0r ~/.vim/skeleton/skeleton.m
 autocmd BufNewFile  *.tex      0r ~/.vim/skeleton/skeleton.tex
 autocmd BufNewFile  *.vhd      0r ~/.vim/skeleton/skeleton.vhd
+autocmd BufNewFile  *.v        0r ~/.vim/skeleton/skeleton.v
 autocmd BufNewFile  *.cpp	   0r ~/.vim/skeleton/skeleton.cpp
 autocmd BufNewFile  *.c	       0r ~/.vim/skeleton/skeleton.c
 autocmd BufNewFile  *.h	       0r ~/.vim/skeleton/skeleton.h
 autocmd BufNewFile  *.adoc     0r ~/.vim/skeleton/skeleton.adoc
 autocmd BufNewFile  *.py       0r ~/.vim/skeleton/skeleton.py
+autocmd BufNewFile  *.pro      0r ~/.vim/skeleton/skeleton.pro
 autocmd BufNewFile  .gitignore 0r ~/.vim/skeleton/skeleton.gitignore
 autocmd BufNewFile  Makefile   0r ~/.vim/skeleton/Makefile
 
