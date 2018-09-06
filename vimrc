@@ -11,6 +11,7 @@ autocmd BufNewFile  *.vhd      0r ~/.vim/skeleton/skeleton.vhd
 autocmd BufNewFile  *.v        0r ~/.vim/skeleton/skeleton.v
 autocmd BufNewFile  *.cpp	   0r ~/.vim/skeleton/skeleton.cpp
 autocmd BufNewFile  *.c	       0r ~/.vim/skeleton/skeleton.c
+autocmd BufNewFile  *.java     0r ~/.vim/skeleton/skeleton.java
 autocmd BufNewFile  *.h	       0r ~/.vim/skeleton/skeleton.h
 autocmd BufNewFile  *.adoc     0r ~/.vim/skeleton/skeleton.adoc
 autocmd BufNewFile  *.py       0r ~/.vim/skeleton/skeleton.py
@@ -227,11 +228,16 @@ let g:netrw_winsize = 25
 " the hiden files
 let g:netrw_list_hide= '\(^\|\s\s\)\zs\.\S\+'
 
-" ========================================================================================================== CALENDAR APP PLUGIN
-" Enable task deletion
-"let g:calendar_task_delete = 1
-let g:calendar_date_endian="{little}"
-let g:calendar_task=1
+" ============================================================================================================ JAVA COMPLETION 2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" To add all missing imports with F6:
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+
+" To remove all unused imports with F7:
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 
 " ========================================================================================================= TMUX NAVIGATION CONF
 let g:tmux_navigator_no_mappings = 1
