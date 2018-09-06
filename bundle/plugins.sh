@@ -33,3 +33,5 @@ git clone https://github.com/xuhdev/vim-latex-live-preview.git
 # Vim-Tmux-Navigator
 git clone https://github.com/christoomey/vim-tmux-navigator.git
 
+# Vim-JavaComplete2
+git clone https://github.com/artur-shaik/vim-javacomplete2.git
