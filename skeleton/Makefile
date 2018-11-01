@@ -22,27 +22,27 @@
 #          make clean     .... remove intermediate and generated files        #
 # ----------------------------------------------------------------------------#
                                                                               
-                         TARGET        = main  
+TARGET        = main
                                                                              
 # ----------------------------------------------------------------------------#
 #                               DIRECTORIES                                   #
 # ----------------------------------------------------------------------------#
-                        BIN           = ./bin                                 
-                        DOC           = ./doc                                 
-                        SYS           = ../CMSIS                              
+BIN           = ./bin                                 
+DOC           = ./doc                                 
+SYS           = ../CMSIS                              
                                                                               
                                                                               
 # ----------------------------------------------------------------------------#
 #                                    TOOLS                                    #
 # ----------------------------------------------------------------------------#
-                       TERMINAL      = gnome-terminal                         
-                       TOOLCHAIN     = arm-none-eabi                          
-                       AS            = $(TOOLCHAIN)-as                        
-                       CC            = $(TOOLCHAIN)-gcc                       
-                       CP            = $(TOOLCHAIN)-objcopy                   
-                       OD            = $(TOOLCHAIN)-objdump                   
-                       GDB           = $(TOOLCHAIN)-gdb                       
-                       SIZE          = $(TOOLCHAIN)-size                      
+TERMINAL      = gnome-terminal                         
+TOOLCHAIN     = arm-none-eabi                          
+AS            = $(TOOLCHAIN)-as                        
+CC            = $(TOOLCHAIN)-gcc                       
+CP            = $(TOOLCHAIN)-objcopy                   
+OD            = $(TOOLCHAIN)-objdump                   
+GDB           = $(TOOLCHAIN)-gdb                       
+SIZE          = $(TOOLCHAIN)-size                      
                                                                               
                                                                               
 # ----------------------------------------------------------------------------#
