@@ -5,64 +5,105 @@ set t_Co=256
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'https://github.com/itchyny/lightline.vim.git'            " Lightline     : Statusline
-Plug 'https://github.com/kshenoy/vim-signature.git'            " Vim-Signature : show bookmark symbols on the left
-Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " Vim-GutenTags : update tags automatically
-Plug 'https://github.com/majutsushi/tagbar.git'                " TagBar        : bar with tags
-Plug 'https://github.com/neomake/neomake.git'                  " NeoMake       : async lynting and syntax correction
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " Deoplete      : async completion
+Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
+Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
+Plug 'https://github.com/kshenoy/vim-signature.git'            " VIM-SIGNATURE    : show bookmark symbols on the left
+Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
+Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
+Plug 'https://github.com/vim-syntastic/syntastic.git'          " SYNTASTIC        : syntax correction & lynting
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE         : async completion
       Plug 'zchee/deoplete-clang'                                " C/C++/C#
       Plug 'zchee/deoplete-jedi'                                 " Python
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'               " Ctrl-P        : fuzzy file finder
-Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DragVisuals   : move selection
-Plug 'https://github.com/airblade/vim-gitgutter.git'           " GitGutter     : show symbols from git on the left
-Plug 'scrooloose/nerdtree'                                     " NerdTree      : file explorer
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'               " CTRL-P           : fuzzy file finder
+Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
+Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
+Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
       Plug 'Xuyuanp/nerdtree-git-plugin'                         " git symbols
-
-Plug 'dpelle/vim-LanguageTool'
-Plug 'https://github.com/morhetz/gruvbox.git'                  " Gruvbox       : colorscheme
-
-Plug 'https://github.com/SirVer/ultisnips.git'                 " UltiSnips     : snippets engine
+Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
+Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
       Plug 'https://github.com/honza/vim-snippets.git'           " Snippets
+Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
+
+Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
+
+"Plug 'https://github.com/neomake/neomake.git'                  " NEOMAKE          : async lynting and syntax correction
 
 " Initialize plugin system
 call plug#end()
 
 let g:languagetool_jar='$HOME/.config/nvim/LanguageTool-4.3/languagetool-commandline.jar'
 
+" =================================================================================================================== SYNTASTIC
+let g:syntastic_enable_ballons           = 1
+let g:syntastic_loc_list_height          = 2
+let g:syntastic_error_symbol             = '✖'
+let g:syntastic_style_error_symbol       = '✖'
+let g:syntastic_warning_symbol           = '!'
+let g:syntastic_style_warning_symbol     = '!'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 0
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 1
+let g:syntastic_enable_highlighting      = 1
+
+let g:syntastic_vhdl_checkers      = ['vcom']                                          " VHDL
+let g:syntastic_cpp_checkers       = ['clang_check', 'gcc']                            " C++
+let g:syntastic_c_checkers         = ['clang_check'] " , 'make']                            C
+let g:syntastic_tex_checkers       = ['chktex']                                        " LATEX
+let g:syntastic_java_checkers      = ['javac']                                         " JAVA
+let g:syntastic_python_python_exec = '/usr/bin/python3.5'                              " DEFINE PYTHON3 AS STANDARD
+let g:syntastic_python_checkers    = ['python', 'pyflakes']                            " PYTHON
+
 " =================================================================================================================== ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-space>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsExpandTrigger       = "<c-space>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
 " ==================================================================================================================== DEOPLETE
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
-let g:deoplete#sources#clang#clang_header = '/usr/include/clang/6.0.0/include/'
-
-" ================================================================================================================= COLORSCHEME
-set termguicolors     " enable true colors support
-colo industry
-colo gruvbox
+let g:deoplete#enable_at_startup            = 1
+"let g:deoplete#sources#clang#libclang_path = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/lib/libclang.so'
+"let g:deoplete#sources#clang#clang_header  = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/include/'
+let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
+let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
 
 " ============================================================================================== SET THE STATUSLINE [LIGHTLINE] 
 set laststatus=2
 set noshowmode
 
+" Possible colorschemes: jellybeans, gruvbox, powerline[default], wombat, solarized dark, 
+" solarized light, PaperColor light, seoul256, one, landscape
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'filetype' ]],
+      \              [ 'filetype' ],
+      \              [ 'syntastic' ],
+      \              [ 'gutentag' ] ],
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'absolutepath', 'spell' ] ]
+      \             [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \   'gutentag': 'LightlineTags',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'component': {
+      \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
+
+function LightlineTags()
+    return '%{gutentags#statusline("[Generating\ tags...]")}'
+endfunction
 
 let g:lightline.inactive = {
 	\ 'left': [ [ 'filename' ] ],
@@ -74,22 +115,17 @@ let g:lightline.tabline = {
 	\ 'left': [ [ 'tabs' ] ],
 	\ 'right': [ [  ] ] }
 
-" ====================================================================================================================== NEOMAKE
-call neomake#configure#automake('nrwi', 300)
+" ================================================================================================================= COLORSCHEME
+set termguicolors     " enable true colors support
+set background=dark
+colo gruvbox
 
-" ================================================================================================== NETRW (NATIVE DIR EXPLORER)
-" preferred view type
-let g:netrw_liststyle = 3
-" no banner
-let g:netrw_banner = 0
-" width of the directory explorer in percentage
-let g:netrw_winsize = 25
-" the hiden files
-let g:netrw_list_hide= '\(^\|\s\s\)\zs\.\S\+'
+" ====================================================================================================================== NEOMAKE
+"call neomake#configure#automake('nrwi', 300)
 
 " ========================================================================================================== CTRL-P FUZZY FINDER
-let g:ctrlp_map='<c-f>'
-let g:ctrlp_show_hidden = 1 "Ignore dotfiles and dotdirs or not
+let g:ctrlp_map               = '<c-f>'
+let g:ctrlp_show_hidden       = 1 "Ignore dotfiles and dotdirs or not
 let g:ctrlp_working_path_mode = ''
 
 " ================================================================================================================= DRAG VISUALS
@@ -238,6 +274,23 @@ imap <silent> <C-S>			<C-O>:update<CR>
 map <silent> <C-S>			<Esc>:update<CR>
 cmap <silent> <C-S>			:update<CR>
 
+" Terminal
+function T()
+  execute "split"
+  execute "terminal"
+  execute "res 10"
+endfunction
+
+function VT()
+  execute "vsplit"
+  execute "terminal"
+"  execute "vertical res 50"
+endfunction
+
+command! T call T()
+command! VT call VT()
+
+" Escape
 map 		  ßß			<Esc>
 map! 		  ßß			<Esc>
 
@@ -262,7 +315,7 @@ nnoremap <c-k> <C-w>k
 nnoremap <c-l> <C-w>l
 
 " Open tag in a new vertical split
-"map <C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-]> :10sp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Open tag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -272,49 +325,8 @@ set wildignore+=*.bmp,*.gif,*.ico,*jpg,*jpeg,*.png
 set wildignore+=*.git
 set wildignore+=*~,*.swp,*.tmp
 
-" ================================================================================================= HEX DUMP MODE (experimental)
+" ===================================================================================================================== HEXMODE
 nnoremap <Leader>h :Hexmode<CR>
 inoremap <Leader>h <Esc>:Hexmode<CR>
 vnoremap <Leader>h :<C-U>Hexmode<CR>
-" ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
-
-" helper function to toggle hex mode
-function ToggleHex()
-    " hex mode should be considered a read-only operation
-    " save values for modified and read-only for restoration later,
-    " and clear the read-only flag for now
-    let l:modified=&mod
-    let l:oldreadonly=&readonly
-    let &readonly=0
-    let l:oldmodifiable=&modifiable
-    let &modifiable=1
-    if !exists("b:editHex") || !b:editHex
-        " save old options
-        let b:oldft=&ft
-        let b:oldbin=&bin
-        " set new options
-        setlocal binary " make sure it overrides any textwidth, etc.
-        silent :e " this will reload the file without trickeries 
-        "(DOS line endings will be shown entirely )
-        let &ft="xxd"
-        " set status
-        let b:editHex=1
-        " switch to hex editor
-        %!xxd
-    else
-        " restore old options
-        let &ft=b:oldft
-        if !b:oldbin
-            setlocal nobinary
-        endif
-        " set status
-        let b:editHex=0
-        " return to normal editing
-        %!xxd -r
-    endif
-    " restore values for modified and read only state
-    let &mod=l:modified
-    let &readonly=l:oldreadonly
-    let &modifiable=l:oldmodifiable
-endfunction
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'

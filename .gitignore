@@ -17,3 +17,8 @@ tags/tags.temp
 bundle/
 !plugins.sh
 
+# KDE
+.directory
+
+# vim
+.netrwhist
