@@ -1,0 +1,15 @@
+= NEOVIM SETUP
+:Author: Kelve T. Henrique 
+:Email: kelvehenrique@pm.me
+:Date: 2018 Dec 12
+:description: <What is this code for?>
+:source-highlighter: coderay
+:listing-caption: Listing
+:toc: left
+
+== Notes
+
+.In order to file type plugins to work:
+    ln -s $HOME/.config/nvim/ftplugin $HOME/.local/share/nvim/site
+
+.In order to deoplete for C/C++ to work, init has to be manully modified.

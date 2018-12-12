@@ -1,8 +1,6 @@
 " ========================================================= THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE 
 set t_Co=256
 
-let g:arduino_cmd = '/home/henrique/arduino-1.8.8/arduino'
-let g:arduino_dir='/home/henrique/arduino-1.8.8/'
 " ==================================================================================================================== VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
