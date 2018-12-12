@@ -9,4 +9,4 @@
 -> In order to make file type plugins work:
     ln -s $HOME/.config/nvim/ftplugin $HOME/.local/share/nvim/site
 
--> In order to deoplete for C/C++ to work, init has to be manully modified.
+-> In order to make deoplete for C/C++ work, init has to be manually modified.
