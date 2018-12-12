@@ -1,6 +1,8 @@
 " ========================================================= THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE 
 set t_Co=256
 
+let g:arduino_cmd = '/home/henrique/arduino-1.8.8/arduino'
+let g:arduino_dir='/home/henrique/arduino-1.8.8/'
 " ==================================================================================================================== VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -19,14 +21,16 @@ Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS    
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
       Plug 'Xuyuanp/nerdtree-git-plugin'                         " git symbols
-Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
+" Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
       Plug 'https://github.com/honza/vim-snippets.git'           " Snippets
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 
-"Plug 'https://github.com/neomake/neomake.git'                  " NEOMAKE          : async lynting and syntax correction
+" Plug 'https://github.com/neomake/neomake.git'                  " NEOMAKE          : async lynting and syntax correction
+
+Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : ARDUINO IDE
 
 " Initialize plugin system
 call plug#end()
@@ -48,7 +52,7 @@ let g:syntastic_enable_highlighting      = 1
 
 let g:syntastic_vhdl_checkers      = ['vcom']                                          " VHDL
 let g:syntastic_cpp_checkers       = ['clang_check', 'gcc']                            " C++
-let g:syntastic_c_checkers         = ['clang_check'] " , 'make']                            C
+let g:syntastic_c_checkers         = ['make']                    " C
 let g:syntastic_tex_checkers       = ['chktex']                                        " LATEX
 let g:syntastic_java_checkers      = ['javac']                                         " JAVA
 let g:syntastic_python_python_exec = '/usr/bin/python3.5'                              " DEFINE PYTHON3 AS STANDARD
@@ -87,12 +91,17 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
+      \ 'component_function': {
+      \   'mode': 'LightlineMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \ },
       \ 'component_expand': {
       \   'syntastic': 'SyntasticStatuslineFlag',
       \   'gutentag': 'LightlineTags',
       \ },
       \ 'component_type': {
       \   'syntastic': 'error',
+      \   'arduino': 'warning',
       \ },
       \ 'component': {
       \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
@@ -115,6 +124,38 @@ let g:lightline.tabline = {
 	\ 'left': [ [ 'tabs' ] ],
 	\ 'right': [ [  ] ] }
 
+"[arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
+function! LightlineArduino()
+  let port = arduino#GetPort()
+  let line = '[' . g:arduino_board . '] [' . g:arduino_programmer . ']'
+  if !empty(port)
+    let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
+  endif
+  return line
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
 " ================================================================================================================= COLORSCHEME
 set termguicolors     " enable true colors support
 set background=dark
@@ -287,8 +328,17 @@ function VT()
 "  execute "vertical res 50"
 endfunction
 
+function TSC()
+  execute "terminal"
+  execute "vsplit"
+  execute "terminal"
+  execute "split"
+  execute "terminal"
+endfunction
+
 command! T call T()
 command! VT call VT()
+command! TSC call TSC()
 
 " Escape
 map 		  ßß			<Esc>
@@ -330,3 +380,7 @@ nnoremap <Leader>h :Hexmode<CR>
 inoremap <Leader>h <Esc>:Hexmode<CR>
 vnoremap <Leader>h :<C-U>Hexmode<CR>
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
+" =============================================================================================================== LOCAL SCRIPTS
+set exrc
+set secure
