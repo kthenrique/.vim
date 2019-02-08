@@ -7,54 +7,74 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
-Plug 'https://github.com/kshenoy/vim-signature.git'            " VIM-SIGNATURE    : show bookmark symbols on the left
-Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
+Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
+  Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
 Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
-Plug 'https://github.com/vim-syntastic/syntastic.git'          " SYNTASTIC        : syntax correction & lynting
+Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
+Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
+Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
+Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
+Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
+  Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
+"Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
+Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE         : async completion
-      Plug 'zchee/deoplete-clang'                                " C/C++/C#
-      Plug 'zchee/deoplete-jedi'                                 " Python
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'               " CTRL-P           : fuzzy file finder
+  Plug 'zchee/deoplete-clang'                                  " C/C++/C#
+  Plug 'zchee/deoplete-jedi'                                   " PYTHON
+  Plug 'Shougo/neco-syntax'                                    " VARIOUS
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
-Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
-      Plug 'Xuyuanp/nerdtree-git-plugin'                         " git symbols
-" Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
-Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
-      Plug 'https://github.com/honza/vim-snippets.git'           " Snippets
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
+"Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
 
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
-
-" Plug 'https://github.com/neomake/neomake.git'                  " NEOMAKE          : async lynting and syntax correction
-
-Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : ARDUINO IDE
 
 " Initialize plugin system
 call plug#end()
 
 let g:languagetool_jar='$HOME/.config/nvim/LanguageTool-4.3/languagetool-commandline.jar'
 
-" =================================================================================================================== SYNTASTIC
-let g:syntastic_enable_ballons           = 1
-let g:syntastic_loc_list_height          = 2
-let g:syntastic_error_symbol             = '✖'
-let g:syntastic_style_error_symbol       = '✖'
-let g:syntastic_warning_symbol           = '!'
-let g:syntastic_style_warning_symbol     = '!'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 0
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 1
-let g:syntastic_enable_highlighting      = 1
+" ========================================================================================================================= ALE
+highlight link ALEVirtualTextError ErrorMsg
+highlight link ALEVirtualTextInfo SpellLocal
+highlight link ALEVirtualTextStyleError TermCursor
+highlight link ALEVirtualTextStyleWarning SpellCap
+highlight link ALEVirtualTextWarning GruvboxYellow
 
-let g:syntastic_vhdl_checkers      = ['vcom']                                          " VHDL
-let g:syntastic_cpp_checkers       = ['clang_check', 'gcc']                            " C++
-let g:syntastic_c_checkers         = ['make']                    " C
-let g:syntastic_tex_checkers       = ['chktex']                                        " LATEX
-let g:syntastic_java_checkers      = ['javac']                                         " JAVA
-let g:syntastic_python_python_exec = '/usr/bin/python3.5'                              " DEFINE PYTHON3 AS STANDARD
-let g:syntastic_python_checkers    = ['python', 'pyflakes']                            " PYTHON
+let g:ale_sign_error         = "\uf05e"
+let g:ale_sign_warning       = "\uf071"
+let g:ale_sign_style_error   = "\u2b4d"
+let g:ale_sign_style_warning = "\ufe15"
+let g:ale_sign_info          = "\u2139"
+
+let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_prefix = " \u2b9e "
+
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+  \   'c': ['gcc', 'clang'],
+  \   'cpp': ['make', 'gcc', 'clang'],
+  \   'java': ['javac', 'checkstyle'],
+  \   'verilog': ['iverilog'],
+  \   'python': ['flake8'],
+  \   'vhdl': ['vcom'],
+  \   'asciidoc': ['redpen'],
+  \   'text': ['redpen'],
+  \}
+let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'c': ['clang-format'],
+  \   'cpp': ['clang-format'],
+  \}
+
+let g:ale_c_parse_makefile=1
+let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
+let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
+let g:ale_c_clangformat_options= "--style=llvm"
+
+let g:ale_python_flake8_options= "--ignore=E221"
 
 " =================================================================================================================== ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -67,12 +87,18 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ==================================================================================================================== DEOPLETE
 let g:deoplete#enable_at_startup            = 1
-"let g:deoplete#sources#clang#libclang_path = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/lib/libclang.so'
-"let g:deoplete#sources#clang#clang_header  = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/include/'
+"let g:deoplete#sources#clang#libclang_path  = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/lib/libclang.so'
+"let g:deoplete#sources#clang#clang_header   = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/include/'
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
 
-" ============================================================================================== SET THE STATUSLINE [LIGHTLINE] 
+" =============================================================================================================== LIGHTLINE-ALE
+let g:lightline#ale#indicator_checking = "\uf110 ..."
+let g:lightline#ale#indicator_warnings = "\uf071: "
+let g:lightline#ale#indicator_errors = "\uf05e: "
+let g:lightline#ale#indicator_ok = "\uf00c: "
+
+" ============================================================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
 set noshowmode
 
@@ -83,34 +109,34 @@ let g:lightline = {
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'filetype' ],
-      \              [ 'syntastic' ],
+      \              [ 'fileencoding', 'filetype' ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', ],
       \              [ 'gutentag' ] ],
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
-      \   'ctrlpmark': 'CtrlPMark',
       \ },
       \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \   'gutentag': 'LightlineTags',
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
       \ },
       \ 'component_type': {
-      \   'syntastic': 'error',
-      \   'arduino': 'warning',
+      \   'linter_checking': 'left',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'left',
       \ },
       \ 'component': {
       \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
+      \   'gutentag': '%{gutentags#statusline("[","...]")}',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'subseparator': { 'left': "\u25c9", 'right': "\u25c9" }
       \ }
-
-function LightlineTags()
-    return '%{gutentags#statusline("[Generating\ tags...]")}'
-endfunction
 
 let g:lightline.inactive = {
 	\ 'left': [ [ 'filename' ] ],
@@ -122,7 +148,7 @@ let g:lightline.tabline = {
 	\ 'left': [ [ 'tabs' ] ],
 	\ 'right': [ [  ] ] }
 
-"[arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
+" ARDUINO - [arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
 function! LightlineArduino()
   let port = arduino#GetPort()
   let line = '[' . g:arduino_board . '] [' . g:arduino_programmer . ']'
@@ -132,40 +158,34 @@ function! LightlineArduino()
   return line
 endfunction
 
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
 function! LightlineMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
         \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+let g:lightline.mode_map = {
+    \ 'n' : "\u2115",
+    \ 'i' : "\U1d540",
+    \ 'R' : "\u211d",
+    \ 'v' : "\U1d54d",
+    \ 'V' : "\U1d54d-\U1d543",
+    \ "\<C-v>": "\U1d54d-\U1d539",
+    \ 'c' : "\u2102",
+    \ 's' : "\U1d54a",
+    \ 'S' : "\U1d54a-\U1d543",
+    \ "\<C-s>": "\U1d54a-\U1d539",
+    \ 't': "\U1d54b",
+    \ }
+
 " ================================================================================================================= COLORSCHEME
 set termguicolors     " enable true colors support
 set background=dark
 colo gruvbox
-
-" ====================================================================================================================== NEOMAKE
-"call neomake#configure#automake('nrwi', 300)
-
-" ========================================================================================================== CTRL-P FUZZY FINDER
-let g:ctrlp_map               = '<c-f>'
-let g:ctrlp_show_hidden       = 1 "Ignore dotfiles and dotdirs or not
-let g:ctrlp_working_path_mode = ''
 
 " ================================================================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
@@ -246,12 +266,12 @@ set backspace=indent,eol,start
 
 " ============================================================================================================= SET INDENTATION 
 set autoindent      " align the new line indent with the previous line
-set textwidth=164   " max character in a line before auto breaking
-set tabstop=4       " number of spaces inserted per tab
-set shiftwidth=4    " number of spaces to indent after a line is broken
+set textwidth=120   " max character in a line before auto breaking
+set tabstop=2       " number of spaces inserted per tab
+set shiftwidth=2    " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
 
-set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set softtabstop=2   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 
 " ======================================================================================== ALWAYS SHOW TAB LINE AND CURRENT CMD 
 set showtabline=2
@@ -339,8 +359,19 @@ command! VT call VT()
 command! TSC call TSC()
 
 " Escape
-map 		  ßß			<Esc>
-map! 		  ßß			<Esc>
+map  ßß <Esc>
+map! ßß <Esc>
+
+" switching tabs
+noremap <A-1> 1gt
+noremap <A-2> 2gt
+noremap <A-3> 3gt
+noremap <A-4> 4gt
+noremap <A-5> 5gt
+noremap <A-6> 6gt
+noremap <A-7> 7gt
+noremap <A-8> 8gt
+noremap <A-9> 9gt
 
 " browsing splits
 nnoremap <c-j> <c-w>j
@@ -363,7 +394,9 @@ nnoremap <c-k> <C-w>k
 nnoremap <c-l> <C-w>l
 
 " Open tag in a new vertical split
-map <C-]> :10sp <CR>:exec("tag ".expand("<cword>"))<CR>
+map gT :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+" Open tag in a new horizontal split
+map gt :vs <CR>:exec("tag ".expand("<cword>"))<CR>
 " Open tag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -378,6 +411,13 @@ nnoremap <Leader>h :Hexmode<CR>
 inoremap <Leader>h <Esc>:Hexmode<CR>
 vnoremap <Leader>h :<C-U>Hexmode<CR>
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
+" ================================================================================================================= VIM-ARDUINO
+"let g:arduino_cmd        = '/home/henrique/arduino-1.8.8/arduino'
+"let g:arduino_dir        = '/home/henrique/arduino-1.8.8/'
+"let g:arduino_home_dir   = '/home/henrique/Projects/Embedded_Systems/Arduino/'
+"let g:arduino_board      = 'arduino:avr:uno' "arduino:avr:atmega2560'
+"let g:arduino_programmer = 'arduino:usbtinyisp'
 
 " =============================================================================================================== LOCAL SCRIPTS
 set exrc
