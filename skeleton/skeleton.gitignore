@@ -1,18 +1,37 @@
+# Object Files
+*.o
+*.ko
+*.obj
+*.elf
+*.bin
+
+# Shared Objects
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# python compiled files
+*.pyc
+
 # stash of qt
 *.stash
 
-# swap files
+# Swap Files
 *.swp
-
-# obj files
-*.o
 
 # debug files
 *.su
-
-# binaries
-*.bin
-*.elf
 
 # linker map
 *.map
@@ -22,9 +41,6 @@
 
 # lists
 *.lst
-
-# python compiled files
-*.pyc
 
 # log files
 *.log

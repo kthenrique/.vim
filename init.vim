@@ -5,6 +5,8 @@ set t_Co=256
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+
+Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
 Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
@@ -17,18 +19,18 @@ Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOO
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
-Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
+"Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE         : async completion
   Plug 'zchee/deoplete-clang'                                  " C/C++/C#
   Plug 'zchee/deoplete-jedi'                                   " PYTHON
+  Plug 'fszymanski/deoplete-emoji'                             " EMOJI CODES
   Plug 'Shougo/neco-syntax'                                    " VARIOUS
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 "Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
 
-Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
-
+Plug 'https://github.com/tpope/vim-surround.git'
 " Initialize plugin system
 call plug#end()
 
