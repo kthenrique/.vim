@@ -99,6 +99,13 @@ let g:ale_python_flake8_options= "--ignore=E221"
 
 "let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
+
+" =============================================================================================================== LIGHTLINE-ALE
+let g:lightline#ale#indicator_checking = "\uf110 ..."
+let g:lightline#ale#indicator_warnings = "\uf071: "
+let g:lightline#ale#indicator_errors = "\uf05e: "
+let g:lightline#ale#indicator_ok = "\uf00c: "
+
 " =================================================================================================================== ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger       = "<c-space>"
@@ -112,12 +119,6 @@ let g:UltiSnipsEditSplit="vertical"
 let g:deoplete#enable_at_startup            = 1
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
-
-" =============================================================================================================== LIGHTLINE-ALE
-let g:lightline#ale#indicator_checking = "\uf110 ..."
-let g:lightline#ale#indicator_warnings = "\uf071: "
-let g:lightline#ale#indicator_errors = "\uf05e: "
-let g:lightline#ale#indicator_ok = "\uf00c: "
 
 " ============================================================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
@@ -203,11 +204,6 @@ let g:lightline.mode_map = {
     \ 't': "\U1d54b",
     \ }
 
-" ================================================================================================================= COLORSCHEME
-set termguicolors     " enable true colors support
-set background=dark
-colo gruvbox
-
 " ================================================================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
 
@@ -232,6 +228,11 @@ nnoremap <Leader>h :Hexmode<CR>
 inoremap <Leader>h <Esc>:Hexmode<CR>
 vnoremap <Leader>h :<C-U>Hexmode<CR>
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
+" ================================================================================================================= COLORSCHEME
+set termguicolors     " enable true colors support
+set background=dark
+colo gruvbox
 
 " =============================================================================================================== SET SKELETONS
 autocmd BufNewFile  *.m	          0r ~/.config/nvim/skeleton/skeleton.m
@@ -362,7 +363,7 @@ map <silent> <C-S>			<Esc>:update<CR>
 cmap <silent> <C-S>			:update<CR>
 
 " Terminal
-function T()
+function ST()
   execute "split"
   execute "terminal"
   execute "res 10"
@@ -382,7 +383,7 @@ function TSC()
   execute "terminal"
 endfunction
 
-command! T call T()
+command! ST call ST()
 command! VT call VT()
 command! TSC call TSC()
 
