@@ -1,10 +1,9 @@
-" ========================================================= THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE 
+" ========================================================= THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE
 set t_Co=256
 
 " ==================================================================================================================== VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
-
 
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
@@ -15,7 +14,7 @@ Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR         
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
 Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
-Plug 'dpelle/vim-LanguageTool'                                 " VIM-LANGUAGETOOL : more than a simple spell check
+Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
@@ -29,12 +28,34 @@ Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS    
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 "Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
-
+"
 Plug 'https://github.com/tpope/vim-surround.git'
+
 " Initialize plugin system
 call plug#end()
 
-let g:languagetool_jar='$HOME/.config/nvim/LanguageTool-4.3/languagetool-commandline.jar'
+" ================================================================================================================== GRAMMAROUS
+let g:grammarous#show_first_error=0   " see the first error in a info window soon after the check
+let g:grammarous#default_comments_only_filetypes={ '*' : 1, 'tex' : 0, 'markdown' : 0, 'text' : 0, } " check comments only
+
+" Move the cursor to the info window
+command GrammarousMove     execute "normal \<Plug>(grammarous-move-to-info-window)"
+" Open the info window for the error under the cursor
+command GrammarousOpen     execute "normal \<Plug>(grammarous-open-info-window)"
+" Fix the error under the cursor automatically
+command GrammarousFix      execute "normal \<Plug>(grammarous-fixit)"
+" Fix all the errors in a current buffer automatically
+command GrammarousFixAll   execute "normal \<Plug>(grammarous-fixall)"
+" Close the information window from checked buffer
+command GrammarousClose    execute "normal \<Plug>(grammarous-close-info-window)"
+" Remove the error under the cursor
+command GrammarousRemove   execute "normal \<Plug>(grammarous-remove-error)"
+" Disable the grammar rule under the cursor
+command GrammarousDisable  execute "normal \<Plug>(grammarous-disable-rule)"
+" Move cursor to the next error
+command GrammarousNext     execute "normal \<Plug>(grammarous-move-to-next-error)"
+" Move cursor to the previous error
+command GrammarousPrevious execute "normal \<Plug>(grammarous-move-to-previous-error)"
 
 " ========================================================================================================================= ALE
 highlight link ALEVirtualTextError ErrorMsg
@@ -62,8 +83,6 @@ let g:ale_linters = {
   \   'verilog': ['iverilog'],
   \   'python': ['flake8'],
   \   'vhdl': ['vcom'],
-  \   'asciidoc': ['redpen'],
-  \   'text': ['redpen'],
   \}
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -74,10 +93,12 @@ let g:ale_fixers = {
 let g:ale_c_parse_makefile=1
 let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
-let g:ale_c_clangformat_options= "--style=llvm"
+let g:ale_c_clangformat_options= "--style=file"
 
 let g:ale_python_flake8_options= "--ignore=E221"
 
+"let g:ale_fix_on_save=1
+"let g:ale_lint_on_save=1
 " =================================================================================================================== ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger       = "<c-space>"
@@ -89,8 +110,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ==================================================================================================================== DEOPLETE
 let g:deoplete#enable_at_startup            = 1
-"let g:deoplete#sources#clang#libclang_path  = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/lib/libclang.so'
-"let g:deoplete#sources#clang#clang_header   = '/home/henrique/.config/nvim/clang/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/include/'
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
 
@@ -104,7 +123,7 @@ let g:lightline#ale#indicator_ok = "\uf00c: "
 set laststatus=2
 set noshowmode
 
-" Possible colorschemes: jellybeans, gruvbox, powerline[default], wombat, solarized dark, 
+" Possible colorschemes: jellybeans, gruvbox, powerline[default], wombat, solarized dark,
 " solarized light, PaperColor light, seoul256, one, landscape
 let g:lightline = {
       \ 'colorscheme': 'one',
@@ -143,7 +162,7 @@ let g:lightline = {
 let g:lightline.inactive = {
 	\ 'left': [ [ 'filename' ] ],
 	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent' ] ] 
+	\            [ 'percent' ] ]
     \}
 
 let g:lightline.tabline = {
@@ -192,13 +211,13 @@ colo gruvbox
 " ================================================================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
 
-vmap  <expr>  H        DVB_Drag('left')                     
-vmap  <expr>  L        DVB_Drag('right')                    
-vmap  <expr>  J        DVB_Drag('down')                     
-vmap  <expr>  K        DVB_Drag('up')                       
-vmap  <expr>  D        DVB_Duplicate()                      
-                                                            
-"Remove any introduced trailing whitespace after moving... 
+vmap  <expr>  H        DVB_Drag('left')
+vmap  <expr>  L        DVB_Drag('right')
+vmap  <expr>  J        DVB_Drag('down')
+vmap  <expr>  K        DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
+"Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
 " ===================================================================================================================== TAG BAR
@@ -208,21 +227,28 @@ let g:tagbar_sort = 0 " sort according to the order in source file
 " ==================================================================================================================== NERDTREE
 map <silent> <F2> :NERDTreeToggle<CR>
 
+" ===================================================================================================================== HEXMODE
+nnoremap <Leader>h :Hexmode<CR>
+inoremap <Leader>h <Esc>:Hexmode<CR>
+vnoremap <Leader>h :<C-U>Hexmode<CR>
+let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
+
 " =============================================================================================================== SET SKELETONS
-autocmd BufNewFile  *.m	       0r ~/.config/nvim/skeleton/skeleton.m
-autocmd BufNewFile  *.tex      0r ~/.config/nvim/skeleton/skeleton.tex
-autocmd BufNewFile  *.vhd      0r ~/.config/nvim/skeleton/skeleton.vhd
-autocmd BufNewFile  *.v        0r ~/.config/nvim/skeleton/skeleton.v
-autocmd BufNewFile  *.cpp	   0r ~/.config/nvim/skeleton/skeleton.cpp
-"autocmd BufNewFile  *.c	       0r ~/.config/nvim/skeleton/skeleton.c
-autocmd BufNewFile  *.c	       0r ~/.config/nvim/skeleton/skeleton_doxy.c
-autocmd BufNewFile  *.h	       0r ~/.config/nvim/skeleton/skeleton_doxy.h
-"autocmd BufNewFile  *.h	       0r ~/.config/nvim/skeleton/skeleton.h
-autocmd BufNewFile  *.adoc     0r ~/.config/nvim/skeleton/skeleton.adoc
-autocmd BufNewFile  *.py       0r ~/.config/nvim/skeleton/skeleton.py
-autocmd BufNewFile  *.pro      0r ~/.config/nvim/skeleton/skeleton.pro
-autocmd BufNewFile  .gitignore 0r ~/.config/nvim/skeleton/skeleton.gitignore
-autocmd BufNewFile  Makefile   0r ~/.config/nvim/skeleton/Makefile
+autocmd BufNewFile  *.m	          0r ~/.config/nvim/skeleton/skeleton.m
+autocmd BufNewFile  *.tex         0r ~/.config/nvim/skeleton/skeleton.tex
+autocmd BufNewFile  *.vhd         0r ~/.config/nvim/skeleton/skeleton.vhd
+autocmd BufNewFile  *.v           0r ~/.config/nvim/skeleton/skeleton.v
+autocmd BufNewFile  *.cpp	      0r ~/.config/nvim/skeleton/skeleton.cpp
+"autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton.c
+autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton_doxy.c
+autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton_doxy.h
+"autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton.h
+autocmd BufNewFile  *.adoc        0r ~/.config/nvim/skeleton/skeleton.adoc
+autocmd BufNewFile  *.py          0r ~/.config/nvim/skeleton/skeleton.py
+autocmd BufNewFile  *.pro         0r ~/.config/nvim/skeleton/skeleton.pro
+autocmd BufNewFile  .gitignore    0r ~/.config/nvim/skeleton/skeleton.gitignore
+autocmd BufNewFile  .clang-format 0r ~/.config/nvim/skeleton/skeleton.clang-format
+autocmd BufNewFile  Makefile      0r ~/.config/nvim/skeleton/Makefile
 
 " ============================================================================================================= UPDATE SKELETON
 autocmd BufWritePre ks|call UpSkel()|'s         " Updating skeleton
@@ -246,53 +272,53 @@ endfun
 
 map <silent> <F5> :call UpSkel()<CR>
 
-" ======================================================================================================== ORDER THE NEW SPLITS 
+" ======================================================================================================== ORDER THE NEW SPLITS
 set splitbelow
 set splitright
 
-" ============================================================================================================== ENABLE FOLDING 
+" ============================================================================================================== ENABLE FOLDING
 set foldmethod=indent
 set foldlevel=99
 
-" =========================================================================================== ENABLE FOLDING WITH THE SPACE BAR 
+" =========================================================================================== ENABLE FOLDING WITH THE SPACE BAR
 nnoremap <space> za
 
-" ========================================================================================================== NO WRAPPING AROUND 
+" ========================================================================================================== NO WRAPPING AROUND
 set nowrap
 
 " ======================================================================================================== USE ALWAYS CLIPBOARD
 set clipboard+=unnamedplus   " To ALWAYS use the clipboard for ALL operations
 
-" ======================================================================================== MAKE BACKSPACE WORK IN A SANE MANNER 
+" ======================================================================================== MAKE BACKSPACE WORK IN A SANE MANNER
 set backspace=indent,eol,start
 
-" ============================================================================================================= SET INDENTATION 
+" ============================================================================================================= SET INDENTATION
 set autoindent      " align the new line indent with the previous line
 set textwidth=120   " max character in a line before auto breaking
-set tabstop=2       " number of spaces inserted per tab
-set shiftwidth=2    " number of spaces to indent after a line is broken
+set tabstop=4       " number of spaces inserted per tab
+set shiftwidth=4    " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
 
-set softtabstop=2   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 
-" ======================================================================================== ALWAYS SHOW TAB LINE AND CURRENT CMD 
-set showtabline=2
+" ======================================================================================== ALWAYS SHOW TAB LINE AND CURRENT CMD
+set showtabline=2   " always show tab page labels
 set showcmd
 
-" ============================================================== ENABLE FILE TYPE DETECTION AND DO LANGUAGE-DEPENDENT INDENTING 
+" ============================================================== ENABLE FILE TYPE DETECTION AND DO LANGUAGE-DEPENDENT INDENTING
 filetype plugin indent on
 
-" =============================================================================================== SWITCH SYNTAX HIGHLIGHTING ON 
+" =============================================================================================== SWITCH SYNTAX HIGHLIGHTING ON
 syntax on
 
 " ================================================================================================= MAKE LATEX THE STANDARD TEX
 let g:tex_flavor='latex'
 
-" =========================================================================================================== SHOW LINE NUMBERS 
+" =========================================================================================================== SHOW LINE NUMBERS
 set number
 " set hybrid line numbers
 " set number relativenumber
-" 
+"
 " " set auto toggle of numbering mode
 " augroup numbertoggle
 "   autocmd!
@@ -300,7 +326,7 @@ set number
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
 
-" ================================================================ ALLOW HIDDEN BUFFERS, DON'T LIMIT TO 1 FILE PER WINDOW/SPLIT 
+" ================================================================ ALLOW HIDDEN BUFFERS, DON'T LIMIT TO 1 FILE PER WINDOW/SPLIT
 set hidden
 
 " ====================================================================================================== CONFIGURING HIGHLIGHTS
@@ -320,17 +346,17 @@ set cul
 "     augroup END
 
 " Reconfigure highlights for spells
-hi clear SpellBad       " Word not recognised
-hi clear SpellCap       " Word not capitalised
-hi clear SpellRare      " Rare word
-hi clear SpellLocal     " Wrong spelling for selected region
+"hi clear SpellBad       " Word not recognised
+"hi clear SpellCap       " Word not capitalised
+"hi clear SpellRare      " Rare word
+"hi clear SpellLocal     " Wrong spelling for selected region
+"
+"hi SpellBad    ctermfg=007      ctermbg=124    cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
+"hi SpellCap    ctermfg=NONE     ctermbg=NONE   cterm=underline   guifg=NONE   guibg=NONE   gui=NONE
+"hi SpellRare   ctermfg=NONE     ctermbg=NONE   cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
+"hi SpellLocal  ctermfg=NONE     ctermbg=NONE   cterm=italic      guifg=NONE   guibg=NONE   gui=NONE
 
-hi SpellBad    ctermfg=007      ctermbg=124    cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
-hi SpellCap    ctermfg=NONE     ctermbg=NONE   cterm=underline   guifg=NONE   guibg=NONE   gui=NONE
-hi SpellRare   ctermfg=NONE     ctermbg=NONE   cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
-hi SpellLocal  ctermfg=NONE     ctermbg=NONE   cterm=italic      guifg=NONE   guibg=NONE   gui=NONE
-
-" ==================================================================================================================== MAPPINGS 
+" ==================================================================================================================== MAPPINGS
 imap <silent> <C-S>			<C-O>:update<CR>
 map <silent> <C-S>			<Esc>:update<CR>
 cmap <silent> <C-S>			:update<CR>
@@ -402,24 +428,11 @@ map gt :vs <CR>:exec("tag ".expand("<cword>"))<CR>
 " Open tag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-" ==================================================================================================================== MAPPINGS 
+" ==================================================================================================================== MAPPINGS
 set wildignore+=*.a,*.o,*.elf
 set wildignore+=*.bmp,*.gif,*.ico,*jpg,*jpeg,*.png
 set wildignore+=*.git
 set wildignore+=*~,*.swp,*.tmp
-
-" ===================================================================================================================== HEXMODE
-nnoremap <Leader>h :Hexmode<CR>
-inoremap <Leader>h <Esc>:Hexmode<CR>
-vnoremap <Leader>h :<C-U>Hexmode<CR>
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-
-" ================================================================================================================= VIM-ARDUINO
-"let g:arduino_cmd        = '/home/henrique/arduino-1.8.8/arduino'
-"let g:arduino_dir        = '/home/henrique/arduino-1.8.8/'
-"let g:arduino_home_dir   = '/home/henrique/Projects/Embedded_Systems/Arduino/'
-"let g:arduino_board      = 'arduino:avr:uno' "arduino:avr:atmega2560'
-"let g:arduino_programmer = 'arduino:usbtinyisp'
 
 " =============================================================================================================== LOCAL SCRIPTS
 set exrc

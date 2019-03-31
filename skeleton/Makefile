@@ -10,7 +10,7 @@
 #            *                                                                #
 #            *                                                                #
 #-----------------------------------------------------------------------------#
-                                                                              
+
 #-----------------------------------------------------------------------------#
 #                                  USAGE                                      #
 #-----------------------------------------------------------------------------#
@@ -21,7 +21,7 @@
 #          make doc       .... run doxygen - output will be in > doc          #
 #          make clean     .... remove intermediate and generated files        #
 #-----------------------------------------------------------------------------#
-                                                                              
+
 #-----------------------------------------------------------------------------#
 #                               DIRECTORIES                                   #
 #-----------------------------------------------------------------------------#
@@ -30,57 +30,60 @@ SRC           = ./src
 INC           = ./inc
 DOC           = ./doc
 SYS           = ./sys
-                                                                              
+
 #-----------------------------------------------------------------------------#
 #                                    TOOLS                                    #
 #-----------------------------------------------------------------------------#
 TERMINAL      = konsole
-AS            = as                        
-CC            = gcc                       
-CP            = objcopy                   
-OD            = objdump                   
-DB            = gdb                       
-SIZE          = size                      
+AS            = as
+CC            = gcc
+CP            = objcopy
+OD            = objdump
+DB            = gdb
+SIZE          = size
 DO            = doxygen
-                                                                              
+
 #-----------------------------------------------------------------------------#
 #                                  LIBS                                       #
 #-----------------------------------------------------------------------------#
-LIBS         += -lm                                                           
-                                                                              
+LIBS         += -lm
+
 #-----------------------------------------------------------------------------#
 #                             SOURCE FILES                                    #
 #-----------------------------------------------------------------------------#
-SRC_FILES     = $(wildcard $(SRC)/*.c)                                                        
-                                                                              
+SRC_FILES     = $(wildcard $(SRC)/*.c)
+
 #-----------------------------------------------------------------------------#
 #                           DIRECTORIES TO INCLUDE                            #
 #-----------------------------------------------------------------------------#
-INC_DIR       = -I$(INC) 
-                                                                              
+INC_DIR       = -I$(INC)
+
 #-----------------------------------------------------------------------------#
 #                           LIBRARIES TO INCLUDE                              #
 #-----------------------------------------------------------------------------#
 LIBS_DIR      = -L$(SYS)
-                                                                             
+
 #-----------------------------------------------------------------------------#
 #                                 OBJECT FILES                                #
 #-----------------------------------------------------------------------------#
 OBJS = $(SRC_FILES:.c=.o)
-                                                                              
+
 #-----------------------------------------------------------------------------#
 #                              COMPILER OPTIONS                               #
 #-----------------------------------------------------------------------------#
-CFLAGS        = -Wall
+CFLAGS        = -Wall # all warning about questionable constructions
+CFLAGS       += -Wextra # extra warnings not included by -Wall
 CFLAGS       += -Wpedantic
-CFLAGS       += -Wextra
 CFLAGS       += -Wmissing-prototypes
 CFLAGS       += -Wshadow
-#CFLAGS     += -Wstrict-prototypes
-#CFLAGS     += -mcpu=$(CPU)                                                         
-#CFLAGS     += -O0                                                                  
-#CFLAGS     += -ffunction-sections -fdata-sections -fsigned-char -fstack-usage      
-                                                                               
+CFLAGS     += -Wstrict-prototypes
+#CFLAGS     += -mcpu=$(CPU)
+#CFLAGS     += -O0
+#CFLAGS     += -ffunction-sections -fdata-sections -fsigned-char -fstack-usage
+CFLAGS      += -fsanitize=undefined #
+
+CFLAGS = $(strip $(CFLAGS))
+
 #------------------------------------------------------------------------------#
 #                              BUILD RULES                                     #
 #------------------------------------------------------------------------------#
@@ -108,27 +111,27 @@ doc: $(DOC)/Doxyfile
 	$(DO) $(DOC)/Doxyfile
 	@echo ""
 	@echo "..................................................................."
-                                                                               
+
 #------------------------------------------------------------------------------#
 #                             DEBUG RULES                                      #
 #------------------------------------------------------------------------------#
 .PHONY: debug
 debug: $(BIN)/
 ifdef SystemRoot
-	@call start JLinkGDBServer -Device XMC4500-1024 -if SWD                    
-else                                                                           
-	$(TERMINAL) -e "JLinkGDBServer -Device XMC4500-1024 -if SWD" &             
-	sleep 1 && $(TERMINAL) -e "telnet localhost 2333" &                        
-endif                                                                          
-	$(GDB) -q $(BIN)/$(TARGET).elf $(GDB_ARGS)                                 
-                                                                               
-                                                                               
-                                                                               
+	@call start JLinkGDBServer -Device XMC4500-1024 -if SWD
+else
+	$(TERMINAL) -e "JLinkGDBServer -Device XMC4500-1024 -if SWD" &
+	sleep 1 && $(TERMINAL) -e "telnet localhost 2333" &
+endif
+	$(GDB) -q $(BIN)/$(TARGET).elf $(GDB_ARGS)
+
+
+
 #------------------------------------------------------------------------------#
 #                             CLEAN RULES                                      #
 #------------------------------------------------------------------------------#
 .PHONY: clean
-clean:                                                                         
+clean:
 	@echo "CLEANING DIRECTORIES .............................................."
 	@echo ""
 	rm -rf $(BIN)/       > /dev/null 2>&1 || true
