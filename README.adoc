@@ -4,9 +4,4 @@
 :Date: 2018 Dec 12
 :description: <What is this code for?>
 
-== Notes
-
--> In order to make file type plugins work:
-    ln -s $HOME/.config/nvim/ftplugin $HOME/.local/share/nvim/site
-
--> In order to make deoplete for C/C++ work, init has to be manually modified.
+Personal Neovim setup.
