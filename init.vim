@@ -28,8 +28,8 @@ Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS    
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 "Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
-"
-Plug 'https://github.com/tpope/vim-surround.git'
+
+Plug 'https://github.com/nelstrom/vim-visual-star-search.git'
 
 " Initialize plugin system
 call plug#end()
@@ -103,8 +103,8 @@ let g:ale_python_flake8_options= "--ignore=E221"
 " =============================================================================================================== LIGHTLINE-ALE
 let g:lightline#ale#indicator_checking = "\uf110 ..."
 let g:lightline#ale#indicator_warnings = "\uf071: "
-let g:lightline#ale#indicator_errors = "\uf05e: "
-let g:lightline#ale#indicator_ok = "\uf00c: "
+let g:lightline#ale#indicator_errors   = "\uf05e: "
+let g:lightline#ale#indicator_ok       = "\uf00c: "
 
 " =================================================================================================================== ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -120,6 +120,10 @@ let g:deoplete#enable_at_startup            = 1
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
 
+" =================================================================================================================== GUTENTAGS
+"let g:gutentags_cache_dir= '/tmp/'
+"let g:gutentags_trace=1
+
 " ============================================================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
 set noshowmode
@@ -134,30 +138,30 @@ let g:lightline = {
       \              [ 'fileencoding', 'filetype' ],
       \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', ],
       \              [ 'gutentag' ] ],
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
+      \   'left':  [ [ 'mode', 'paste' ],
+      \              [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \ },
       \ 'component_expand': {
-      \   'linter_checking': 'lightline#ale#checking',
-      \   'linter_warnings': 'lightline#ale#warnings',
-      \   'linter_errors': 'lightline#ale#errors',
-      \   'linter_ok': 'lightline#ale#ok',
+      \   'linter_checking' : 'lightline#ale#checking',
+      \   'linter_warnings' : 'lightline#ale#warnings',
+      \   'linter_errors'   : 'lightline#ale#errors',
+      \   'linter_ok'       : 'lightline#ale#ok',
       \ },
       \ 'component_type': {
-      \   'linter_checking': 'left',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error',
-      \   'linter_ok': 'left',
+      \   'linter_checking' : 'left',
+      \   'linter_warnings' : 'warning',
+      \   'linter_errors'   : 'error',
+      \   'linter_ok'       : 'left',
       \ },
       \ 'component': {
-      \   'tagbar': '%{tagbar#currenttag("[%s]", "", "f")}',
-      \   'gutentag': '%{gutentags#statusline("[","...]")}',
+      \   'tagbar'   : '%{tagbar#currenttag("[%s]", "", "f")}',
+      \   'gutentag' : '%{gutentags#statusline("[","...]")}',
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': "\u25c9", 'right': "\u25c9" }
+      \ 'separator'    : { 'left' : '', 'right'      : '' },
+      \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" }
       \ }
 
 let g:lightline.inactive = {
@@ -246,6 +250,7 @@ autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton_doxy.h
 "autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton.h
 autocmd BufNewFile  *.adoc        0r ~/.config/nvim/skeleton/skeleton.adoc
 autocmd BufNewFile  *.py          0r ~/.config/nvim/skeleton/skeleton.py
+
 autocmd BufNewFile  *.pro         0r ~/.config/nvim/skeleton/skeleton.pro
 autocmd BufNewFile  .gitignore    0r ~/.config/nvim/skeleton/skeleton.gitignore
 autocmd BufNewFile  .clang-format 0r ~/.config/nvim/skeleton/skeleton.clang-format
@@ -278,8 +283,8 @@ set splitbelow
 set splitright
 
 " ============================================================================================================== ENABLE FOLDING
-set foldmethod=indent
-set foldlevel=99
+set foldmethod =indent
+set foldlevel  =99
 
 " =========================================================================================== ENABLE FOLDING WITH THE SPACE BAR
 nnoremap <space> za
@@ -295,9 +300,9 @@ set backspace=indent,eol,start
 
 " ============================================================================================================= SET INDENTATION
 set autoindent      " align the new line indent with the previous line
-set textwidth=120   " max character in a line before auto breaking
-set tabstop=4       " number of spaces inserted per tab
-set shiftwidth=4    " number of spaces to indent after a line is broken
+set textwidth  =120 " max character in a line before auto breaking
+set tabstop    =4   " number of spaces inserted per tab
+set shiftwidth =4   " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
 
 set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
