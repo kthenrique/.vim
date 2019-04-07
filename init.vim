@@ -13,7 +13,7 @@ Plug 'scrooloose/nerdtree'                                     " NERDTREE       
 Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
-Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
+  Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
 Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
@@ -77,25 +77,25 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-  \   'c': ['gcc', 'clang'],
-  \   'cpp': ['make', 'gcc', 'clang'],
-  \   'java': ['javac', 'checkstyle'],
-  \   'verilog': ['iverilog'],
-  \   'python': ['flake8'],
-  \   'vhdl': ['vcom'],
+  \   'c'       : ['gcc', 'clang'],
+  \   'cpp'     : ['make', 'gcc', 'clang'],
+  \   'java'    : ['javac', 'checkstyle'],
+  \   'verilog' : ['iverilog'],
+  \   'python'  : ['flake8'],
+  \   'vhdl'    : ['vcom'],
   \}
 let g:ale_fixers = {
-  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'c': ['clang-format'],
-  \   'cpp': ['clang-format'],
+  \   '*'   : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'c'   : ['clang-format'],
+  \   'cpp' : ['clang-format'],
   \}
 
-let g:ale_c_parse_makefile=1
 let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clangformat_options= "--style=file"
+let g:ale_c_parse_makefile=1
 
-let g:ale_python_flake8_options= "--ignore=E221"
+let g:ale_python_flake8_options= "--ignore=E221" " Ignore
 
 "let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
@@ -121,8 +121,12 @@ let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
 
 " =================================================================================================================== GUTENTAGS
-"let g:gutentags_cache_dir= '/tmp/'
-"let g:gutentags_trace=1
+let g:gutentags_file_list_command = {
+\ 'markers': {
+\   '.git': 'git ls-files',
+\   '.hg': 'hg files',
+\   },
+\ }
 
 " ============================================================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
@@ -243,6 +247,8 @@ autocmd BufNewFile  *.m	          0r ~/.config/nvim/skeleton/skeleton.m
 autocmd BufNewFile  *.tex         0r ~/.config/nvim/skeleton/skeleton.tex
 autocmd BufNewFile  *.vhd         0r ~/.config/nvim/skeleton/skeleton.vhd
 autocmd BufNewFile  *.v           0r ~/.config/nvim/skeleton/skeleton.v
+autocmd BufNewFile  *.asm         0r ~/.config/nvim/skeleton/skeleton.asm
+autocmd BufNewFile  *.s           0r ~/.config/nvim/skeleton/skeleton.asm
 autocmd BufNewFile  *.cpp	      0r ~/.config/nvim/skeleton/skeleton.cpp
 "autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton.c
 autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton_doxy.c
@@ -380,6 +386,11 @@ function VT()
 "  execute "vertical res 50"
 endfunction
 
+function TT()
+  execute "tabe"
+  execute "terminal"
+endfunction
+
 function TSC()
   execute "terminal"
   execute "vsplit"
@@ -390,6 +401,7 @@ endfunction
 
 command! ST call ST()
 command! VT call VT()
+command! TT call TT()
 command! TSC call TSC()
 
 " Escape
@@ -435,11 +447,15 @@ map gt :vs <CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " ==================================================================================================================== MAPPINGS
-set wildignore+=*.a,*.o,*.elf
+set wildignore+=*.a,*.o,*.elf,*.out
 set wildignore+=*.bmp,*.gif,*.ico,*jpg,*jpeg,*.png
+set wildignore+=*.pdf
 set wildignore+=*.git
 set wildignore+=*~,*.swp,*.tmp
+set wildignore+=*.directory
 
 " =============================================================================================================== LOCAL SCRIPTS
+" source local init.vim files
 set exrc
+" restrict usage of some commands inside local init.vim files
 set secure
