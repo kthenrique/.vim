@@ -23,7 +23,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE       
   Plug 'zchee/deoplete-clang'                                  " C/C++/C#
   Plug 'zchee/deoplete-jedi'                                   " PYTHON
   Plug 'fszymanski/deoplete-emoji'                             " EMOJI CODES
-  Plug 'Shougo/neco-syntax'                                    " VARIOUS
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
 Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
@@ -117,8 +116,15 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ==================================================================================================================== DEOPLETE
 let g:deoplete#enable_at_startup            = 1
+
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
+
+let g:deoplete#sources#jedi#statement_length=80
+let g:deoplete#sources#jedi#show_docstring=1
+
+" Disable preview on Scratch of Omnifunction
+set completeopt-=preview
 
 " =================================================================================================================== GUTENTAGS
 let g:gutentags_file_list_command = {
@@ -225,7 +231,7 @@ vmap  <expr>  D        DVB_Duplicate()
 let g:DVB_TrimWS = 1
 
 " ===================================================================================================================== TAG BAR
-nnoremap <silent> <F3> :TagbarToggle<CR>
+nnoremap <silent> <F3> :TagbarOpenAutoClose<CR>
 let g:tagbar_sort = 0 " sort according to the order in source file
 
 " ==================================================================================================================== NERDTREE
@@ -284,6 +290,13 @@ endfun
 
 map <silent> <F5> :call UpSkel()<CR>
 
+" ===================================================================================================================== GENERAL
+" no wrapping around
+"set nowrap
+
+" Allow hidden buffers, don't limit to 1 file per window/split
+set hidden
+
 " ======================================================================================================== ORDER THE NEW SPLITS
 set splitbelow
 set splitright
@@ -294,9 +307,6 @@ set foldlevel  =99
 
 " =========================================================================================== ENABLE FOLDING WITH THE SPACE BAR
 nnoremap <space> za
-
-" ========================================================================================================== NO WRAPPING AROUND
-set nowrap
 
 " ======================================================================================================== USE ALWAYS CLIPBOARD
 set clipboard+=unnamedplus   " To ALWAYS use the clipboard for ALL operations
@@ -337,9 +347,6 @@ set number
 "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
-
-" ================================================================ ALLOW HIDDEN BUFFERS, DON'T LIMIT TO 1 FILE PER WINDOW/SPLIT
-set hidden
 
 " ====================================================================================================== CONFIGURING HIGHLIGHTS
 set hlsearch "highlight searches
@@ -445,6 +452,10 @@ map gT :sp <CR>:exec("tag ".expand("<cword>"))<CR>
 map gt :vs <CR>:exec("tag ".expand("<cword>"))<CR>
 " Open tag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Don't jump rightway when using * and #
+nnoremap * *N
+nnoremap # #N
 
 " ==================================================================================================================== MAPPINGS
 set wildignore+=*.a,*.o,*.elf,*.out

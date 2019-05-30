@@ -1,4 +1,4 @@
-" ========================================= SET INDENTATION ===================================================================
+" ================================ SET INDENTATION ===================================
 " Start new file with all folded
 "au BufEnter *.tex :normal zM
 
@@ -6,3 +6,5 @@
 set spelllang=en
 set spell
 set textwidth=90   " max character in a line before auto breaking
+
+let g:gutentags_enabled=0

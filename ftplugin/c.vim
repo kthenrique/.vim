@@ -1,5 +1,6 @@
 " configure tags - add additional tags here or comment out not-used ones set tags+=~/.vim/tags/cpp
 "set tags+=../tags/gtk
+set keywordprg=:Man
 set tags+=~/.config/nvim/tags/linux
 
 " Update path to common inclusion path names
