@@ -1,7 +1,7 @@
-" ========================================================= THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE
+" ====================== THIS MUST BE FIRST, BECAUSE IT CHANGES OTHER OPTIONS AS CONSEQUENCE
 set t_Co=256
 
-" ==================================================================================================================== VIM-PLUG
+" ================================================================================= VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -33,7 +33,7 @@ Plug 'https://github.com/nelstrom/vim-visual-star-search.git'
 " Initialize plugin system
 call plug#end()
 
-" ================================================================================================================== GRAMMAROUS
+" =============================================================================== GRAMMAROUS
 let g:grammarous#show_first_error=0   " see the first error in a info window soon after the check
 let g:grammarous#default_comments_only_filetypes={ '*' : 1, 'tex' : 0, 'markdown' : 0, 'text' : 0, } " check comments only
 
@@ -56,7 +56,7 @@ command GrammarousNext     execute "normal \<Plug>(grammarous-move-to-next-error
 " Move cursor to the previous error
 command GrammarousPrevious execute "normal \<Plug>(grammarous-move-to-previous-error)"
 
-" ========================================================================================================================= ALE
+" ====================================================================================== ALE
 highlight link ALEVirtualTextError ErrorMsg
 highlight link ALEVirtualTextInfo SpellLocal
 highlight link ALEVirtualTextStyleError TermCursor
@@ -76,8 +76,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-  \   'c'       : ['gcc', 'clang'],
-  \   'cpp'     : ['make', 'gcc', 'clang'],
+  \   'c'       : ['gcc', 'clang', 'cppcheck'],
+  \   'cpp'     : ['make', 'gcc', 'clang', 'cppcheck'],
   \   'java'    : ['javac', 'checkstyle'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
@@ -91,21 +91,21 @@ let g:ale_fixers = {
 
 let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
-let g:ale_c_clangformat_options= "--style=file"
+let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
 let g:ale_c_parse_makefile=1
 
 let g:ale_python_flake8_options= "--ignore=E221" " Ignore
 
-"let g:ale_fix_on_save=1
+let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
 
-" =============================================================================================================== LIGHTLINE-ALE
+" ============================================================================ LIGHTLINE-ALE
 let g:lightline#ale#indicator_checking = "\uf110 ..."
 let g:lightline#ale#indicator_warnings = "\uf071: "
 let g:lightline#ale#indicator_errors   = "\uf05e: "
 let g:lightline#ale#indicator_ok       = "\uf00c: "
 
-" =================================================================================================================== ULTISNIPS
+" ================================================================================ ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger       = "<c-space>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
@@ -114,7 +114,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" ==================================================================================================================== DEOPLETE
+" ================================================================================= DEOPLETE
 let g:deoplete#enable_at_startup            = 1
 
 let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
@@ -126,7 +126,7 @@ let g:deoplete#sources#jedi#show_docstring=1
 " Disable preview on Scratch of Omnifunction
 set completeopt-=preview
 
-" =================================================================================================================== GUTENTAGS
+" ================================================================================ GUTENTAGS
 let g:gutentags_file_list_command = {
 \ 'markers': {
 \   '.git': 'git ls-files',
@@ -134,7 +134,7 @@ let g:gutentags_file_list_command = {
 \   },
 \ }
 
-" ============================================================================================== SET THE STATUSLINE [LIGHTLINE]
+" =========================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
 set noshowmode
 
@@ -218,7 +218,7 @@ let g:lightline.mode_map = {
     \ 't': "\U1d54b",
     \ }
 
-" ================================================================================================================= DRAG VISUALS
+" ============================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
 
 vmap  <expr>  H        DVB_Drag('left')
@@ -230,25 +230,25 @@ vmap  <expr>  D        DVB_Duplicate()
 "Remove any introduced trailing whitespace after moving...
 let g:DVB_TrimWS = 1
 
-" ===================================================================================================================== TAG BAR
+" ================================================================================== TAG BAR
 nnoremap <silent> <F3> :TagbarOpenAutoClose<CR>
 let g:tagbar_sort = 0 " sort according to the order in source file
 
-" ==================================================================================================================== NERDTREE
+" ================================================================================= NERDTREE
 map <silent> <F2> :NERDTreeToggle<CR>
 
-" ===================================================================================================================== HEXMODE
+" ================================================================================== HEXMODE
 nnoremap <Leader>h :Hexmode<CR>
 inoremap <Leader>h <Esc>:Hexmode<CR>
 vnoremap <Leader>h :<C-U>Hexmode<CR>
 let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 
-" ================================================================================================================= COLORSCHEME
+" ============================================================================== COLORSCHEME
 set termguicolors     " enable true colors support
 set background=dark
 colo gruvbox
 
-" =============================================================================================================== SET SKELETONS
+" ============================================================================ SET SKELETONS
 autocmd BufNewFile  *.m	          0r ~/.config/nvim/skeleton/skeleton.m
 autocmd BufNewFile  *.tex         0r ~/.config/nvim/skeleton/skeleton.tex
 autocmd BufNewFile  *.vhd         0r ~/.config/nvim/skeleton/skeleton.vhd
@@ -268,7 +268,7 @@ autocmd BufNewFile  .gitignore    0r ~/.config/nvim/skeleton/skeleton.gitignore
 autocmd BufNewFile  .clang-format 0r ~/.config/nvim/skeleton/skeleton.clang-format
 autocmd BufNewFile  Makefile      0r ~/.config/nvim/skeleton/Makefile
 
-" ============================================================================================================= UPDATE SKELETON
+" ========================================================================== UPDATE SKELETON
 autocmd BufWritePre ks|call UpSkel()|'s         " Updating skeleton
 fun UpSkel()
   if line("$") > 20
@@ -290,53 +290,53 @@ endfun
 
 map <silent> <F5> :call UpSkel()<CR>
 
-" ===================================================================================================================== GENERAL
+" ================================================================================== GENERAL
 " no wrapping around
 "set nowrap
 
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
-" ======================================================================================================== ORDER THE NEW SPLITS
+" ===================================================================== ORDER THE NEW SPLITS
 set splitbelow
 set splitright
 
-" ============================================================================================================== ENABLE FOLDING
-set foldmethod =indent
+" =========================================================================== ENABLE FOLDING
+set foldmethod =syntax
 set foldlevel  =99
 
-" =========================================================================================== ENABLE FOLDING WITH THE SPACE BAR
+" ======================================================== ENABLE FOLDING WITH THE SPACE BAR
 nnoremap <space> za
 
-" ======================================================================================================== USE ALWAYS CLIPBOARD
+" ===================================================================== USE ALWAYS CLIPBOARD
 set clipboard+=unnamedplus   " To ALWAYS use the clipboard for ALL operations
 
-" ======================================================================================== MAKE BACKSPACE WORK IN A SANE MANNER
+" ===================================================== MAKE BACKSPACE WORK IN A SANE MANNER
 set backspace=indent,eol,start
 
-" ============================================================================================================= SET INDENTATION
+" ========================================================================== SET INDENTATION
 set autoindent      " align the new line indent with the previous line
-set textwidth  =120 " max character in a line before auto breaking
+set textwidth  =90  " max character in a line before auto breaking
 set tabstop    =4   " number of spaces inserted per tab
 set shiftwidth =4   " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
 
 set softtabstop=4   " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 
-" ======================================================================================== ALWAYS SHOW TAB LINE AND CURRENT CMD
+" ===================================================== ALWAYS SHOW TAB LINE AND CURRENT CMD
 set showtabline=2   " always show tab page labels
 set showcmd
 
-" ============================================================== ENABLE FILE TYPE DETECTION AND DO LANGUAGE-DEPENDENT INDENTING
+" =========================== ENABLE FILE TYPE DETECTION AND DO LANGUAGE-DEPENDENT INDENTING
 filetype plugin indent on
 
-" =============================================================================================== SWITCH SYNTAX HIGHLIGHTING ON
+" ============================================================ SWITCH SYNTAX HIGHLIGHTING ON
 syntax on
 
-" ================================================================================================= MAKE LATEX THE STANDARD TEX
+" ============================================================== MAKE LATEX THE STANDARD TEX
 let g:tex_flavor='latex'
 
-" =========================================================================================================== SHOW LINE NUMBERS
+" ======================================================================== SHOW LINE NUMBERS
 set number
 " set hybrid line numbers
 " set number relativenumber
@@ -348,7 +348,7 @@ set number
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
 
-" ====================================================================================================== CONFIGURING HIGHLIGHTS
+" =================================================================== CONFIGURING HIGHLIGHTS
 set hlsearch "highlight searches
 set ignorecase "ignore case in search and replace
 set smartcase "don't ignore case if Upper Case letters appear in search
@@ -375,7 +375,7 @@ set cul
 "hi SpellRare   ctermfg=NONE     ctermbg=NONE   cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
 "hi SpellLocal  ctermfg=NONE     ctermbg=NONE   cterm=italic      guifg=NONE   guibg=NONE   gui=NONE
 
-" ==================================================================================================================== MAPPINGS
+" ================================================================================= MAPPINGS
 imap <silent> <C-S>			<C-O>:update<CR>
 map <silent> <C-S>			<Esc>:update<CR>
 cmap <silent> <C-S>			:update<CR>
@@ -457,7 +457,7 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap * *N
 nnoremap # #N
 
-" ==================================================================================================================== MAPPINGS
+" ================================================================================= MAPPINGS
 set wildignore+=*.a,*.o,*.elf,*.out
 set wildignore+=*.bmp,*.gif,*.ico,*jpg,*jpeg,*.png
 set wildignore+=*.pdf
@@ -465,7 +465,7 @@ set wildignore+=*.git
 set wildignore+=*~,*.swp,*.tmp
 set wildignore+=*.directory
 
-" =============================================================================================================== LOCAL SCRIPTS
+" ============================================================================ LOCAL SCRIPTS
 " source local init.vim files
 set exrc
 " restrict usage of some commands inside local init.vim files
