@@ -5,6 +5,8 @@ set t_Co=256
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
+
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
