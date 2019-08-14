@@ -84,6 +84,7 @@ let g:ale_linters = {
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
+  \   'sh'      : ['shellcheck'],
   \}
 let g:ale_fixers = {
   \   '*'   : ['remove_trailing_lines', 'trim_whitespace'],
