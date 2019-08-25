@@ -13,7 +13,7 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER      
 Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
   Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
 Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
-Plug 'https://github.com/ludovicchabant/vim-gutentags.git'     " VIM-GUTENTAGS    : update tags automatically
+Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
 Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
@@ -85,11 +85,12 @@ let g:ale_linters = {
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
   \   'sh'      : ['shellcheck'],
+  \   'cmake'   : ['cmakelint'],
   \}
 let g:ale_fixers = {
-  \   '*'   : ['remove_trailing_lines', 'trim_whitespace'],
-  \   'c'   : ['clang-format'],
-  \   'cpp' : ['clang-format'],
+  \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'c'     : ['clang-format'],
+  \   'cpp'   : ['clang-format'],
   \}
 
 let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
@@ -129,14 +130,6 @@ let g:deoplete#sources#jedi#show_docstring=1
 " Disable preview on Scratch of Omnifunction
 set completeopt-=preview
 
-" ================================================================================ GUTENTAGS
-let g:gutentags_file_list_command = {
-\ 'markers': {
-\   '.git': 'git ls-files',
-\   '.hg': 'hg files',
-\   },
-\ }
-
 " =========================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
 set noshowmode
@@ -149,8 +142,7 @@ let g:lightline = {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', ],
-      \              [ 'gutentag' ] ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', ] ],
       \   'left':  [ [ 'mode', 'paste' ],
       \              [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
@@ -171,7 +163,6 @@ let g:lightline = {
       \ },
       \ 'component': {
       \   'tagbar'   : '%{tagbar#currenttag("[%s]", "", "f")}',
-      \   'gutentag' : '%{gutentags#statusline("[","...]")}',
       \ },
       \ 'separator'    : { 'left' : '', 'right'      : '' },
       \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" }
