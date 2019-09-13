@@ -20,7 +20,7 @@ Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS     
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
-"Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
+Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE         : async completion
   Plug 'zchee/deoplete-clang'                                  " C/C++/C#
   Plug 'zchee/deoplete-jedi'                                   " PYTHON
@@ -80,7 +80,7 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
   \   'c'       : ['gcc', 'clang', 'cppcheck'],
   \   'cpp'     : ['make', 'gcc', 'clang', 'cppcheck'],
-  \   'java'    : ['javac', 'checkstyle'],
+  \   'java'    : ['javac'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
@@ -93,6 +93,7 @@ let g:ale_fixers = {
   \   'cpp'   : ['clang-format'],
   \}
 
+"java  'checkstyle'],
 let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
@@ -260,6 +261,7 @@ autocmd BufNewFile  *.py          0r ~/.config/nvim/skeleton/skeleton.py
 autocmd BufNewFile  *.pro         0r ~/.config/nvim/skeleton/skeleton.pro
 autocmd BufNewFile  .gitignore    0r ~/.config/nvim/skeleton/skeleton.gitignore
 autocmd BufNewFile  .clang-format 0r ~/.config/nvim/skeleton/skeleton.clang-format
+autocmd BufNewFile  CMakeLists.txt 0r ~/.config/nvim/skeleton/CMakeLists.txt
 autocmd BufNewFile  Makefile      0r ~/.config/nvim/skeleton/Makefile
 
 " ========================================================================== UPDATE SKELETON
@@ -332,15 +334,6 @@ let g:tex_flavor='latex'
 
 " ======================================================================== SHOW LINE NUMBERS
 set number
-" set hybrid line numbers
-" set number relativenumber
-"
-" " set auto toggle of numbering mode
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
 
 " =================================================================== CONFIGURING HIGHLIGHTS
 set hlsearch "highlight searches
@@ -349,25 +342,6 @@ set smartcase "don't ignore case if Upper Case letters appear in search
 
 " Set the highlight for line number
 set cul
-" hi clear CursorLine
-" augroup CLClear
-"         autocmd! ColorScheme * hi clear CursorLine
-"     augroup END
-" hi CursorLineNR cterm=bold
-" augroup CLNRSet
-"         autocmd! ColorScheme * hi CursorLineNR cterm=bold
-"     augroup END
-
-" Reconfigure highlights for spells
-"hi clear SpellBad       " Word not recognised
-"hi clear SpellCap       " Word not capitalised
-"hi clear SpellRare      " Rare word
-"hi clear SpellLocal     " Wrong spelling for selected region
-"
-"hi SpellBad    ctermfg=007      ctermbg=124    cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
-"hi SpellCap    ctermfg=NONE     ctermbg=NONE   cterm=underline   guifg=NONE   guibg=NONE   gui=NONE
-"hi SpellRare   ctermfg=NONE     ctermbg=NONE   cterm=bold        guifg=NONE   guibg=NONE   gui=NONE
-"hi SpellLocal  ctermfg=NONE     ctermbg=NONE   cterm=italic      guifg=NONE   guibg=NONE   gui=NONE
 
 " ================================================================================= MAPPINGS
 imap <silent> <C-S>			<C-O>:update<CR>
@@ -451,7 +425,7 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap * *N
 nnoremap # #N
 
-" ================================================================================= MAPPINGS
+" ================================================== FILE PATTERNS TO IGNORE WHILE EXPANDING
 set wildignore+=*.a,*.o,*.elf,*.out
 set wildignore+=*.bmp,*.gif,*.ico,*jpg,*jpeg,*.png
 set wildignore+=*.pdf
