@@ -8,8 +8,8 @@
 ** Description: <What is this code for?> 
 ***************************************************************************/
 
-int main(){
-
+int main(int argc, char* argv[])
+{
 
     return 0;
 }
