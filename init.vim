@@ -298,7 +298,7 @@ set splitbelow
 set splitright
 
 " =========================================================================== ENABLE FOLDING
-set foldmethod =syntax
+set foldmethod =indent
 set foldlevel  =99
 
 " ======================================================== ENABLE FOLDING WITH THE SPACE BAR
