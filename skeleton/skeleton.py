@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 # ----------------------------------------------------------------------------
-# -- Project    : <project title> 
+# -- Project    : <project title>
 # ----------------------------------------------------------------------------
-# -- File       : <filename> 
+# -- File       : <filename>
 # -- Author     : Kelve T. Henrique
-# -- Last update: <date> 
+# -- Last update: <date>
 # ----------------------------------------------------------------------------
-# -- Description: <What is this code for?> 
+# -- Description: <What is this code for?>
 # ----------------------------------------------------------------------------
-
