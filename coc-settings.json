@@ -1,0 +1,41 @@
+{
+    "coc": {
+        "preferences": {
+            "diagnostic": {
+                "displayByAle":true
+            }
+        }
+    },
+
+    "python": {
+        "setInterpreter":"/usr/bin/python3",
+        "linting": {
+            "enabled":false
+        }
+    },
+
+    "suggest": {
+        "timeout":1000,
+        "snippetIndicator":"\u24c8"
+    },
+    "codeLens": {
+        "enable":false
+    },
+    "translator": {
+        "toLang": "de",
+        "engines": ["bing", "google"]
+    },
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    }
+
+}
