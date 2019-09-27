@@ -5,35 +5,57 @@ set t_Co=256
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
-
-Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
-Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
-Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
-Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
-  Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
-Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
-Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC              : Language client
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
+Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
 Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
+"Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
+
+Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
-Plug 'artur-shaik/vim-javacomplete2'                           " JAVACOMPLETE2    : Java completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " DEOPLETE         : async completion
-  Plug 'zchee/deoplete-clang'                                  " C/C++/C#
-  Plug 'zchee/deoplete-jedi'                                   " PYTHON
-  Plug 'fszymanski/deoplete-emoji'                             " EMOJI CODES
-Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
-Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
-"Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
+Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
+Plug 'https://github.com/nelstrom/vim-visual-star-search.git'  " VISUAL-STAR      : search words in visual
+Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 
-Plug 'https://github.com/nelstrom/vim-visual-star-search.git'
+Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
+  Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
+Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
+Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
+Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
+Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
 
+" ====================================================================================== COC
+" gd - go to definition of word under cursor
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+" gh - get hint on whatever's under the cursor
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" rename the current word in the cursor
+nmap <leader>cr  <Plug>(coc-rename)
+nmap <leader>cf  <Plug>(coc-format-selected)
+vmap <leader>cf  <Plug>(coc-format-selected)
+
+" =========================================================================== COC-TRANSLATOR
 " Initialize plugin system
 call plug#end()
+" popup
+nmap <Leader>t <Plug>(coc-translator-p)
+" echo
+nmap <Leader>e <Plug>(coc-translator-e)
+" replace
+nmap <Leader>r <Plug>(coc-translator-r)
 
 " =============================================================================== GRAMMAROUS
 let g:grammarous#show_first_error=0   " see the first error in a info window soon after the check
@@ -80,7 +102,6 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
   \   'c'       : ['gcc', 'clang', 'cppcheck'],
   \   'cpp'     : ['make', 'gcc', 'clang', 'cppcheck'],
-  \   'java'    : ['javac'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
@@ -112,12 +133,27 @@ let g:lightline#ale#indicator_ok       = "\uf00c: "
 
 " ================================================================================ ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger       = "<c-space>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+ let g:UltiSnipsExpandTrigger       = "<c-space>"
+ let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+ let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " ================================================================================= DEOPLETE
 let g:deoplete#enable_at_startup            = 1
@@ -143,12 +179,14 @@ let g:lightline = {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok', ] ],
-      \   'left':  [ [ 'mode', 'paste' ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus', 'currentfunction' ] ],
+      \   'left':  [ [ 'mode', 'paste', 'coc' ],
       \              [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'cocstatus': 'coc#status',
       \ },
       \ 'component_expand': {
       \   'linter_checking' : 'lightline#ale#checking',
@@ -187,6 +225,10 @@ function! LightlineArduino()
     let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
   endif
   return line
+endfunction
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
 endfunction
 
 function! LightlineMode()
