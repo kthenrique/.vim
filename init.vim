@@ -4,6 +4,8 @@ set t_Co=256
 " ================================================================================= VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'arithran/vim-delete-hidden-buffers'
+Plug 'https://github.com/kshenoy/vim-signature'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC              : Language client
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
@@ -155,14 +157,11 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-" ================================================================================= DEOPLETE
-let g:deoplete#enable_at_startup            = 1
-
-let g:deoplete#sources#clang#libclang_path  = '/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
-let g:deoplete#sources#clang#clang_header   = '/usr/include/clang/6.0.0/include/'
-
-let g:deoplete#sources#jedi#statement_length=80
-let g:deoplete#sources#jedi#show_docstring=1
+" ================================================================================= GEN-TAGS
+let g:gen_tags#gtags_auto_gen=1
+let g:gen_tags#gtags_auto_update=1
+let g:gen_tags#ctags_auto_gen=1
+let g:gen_tags#ctags_auto_update=1
 
 " Disable preview on Scratch of Omnifunction
 set completeopt-=preview
