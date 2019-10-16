@@ -7,6 +7,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'https://github.com/kshenoy/vim-signature'
 
+Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC              : Language client
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
@@ -30,6 +32,22 @@ Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX        
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
 
+
+" ================================================================================= STARTIFY
+" Automatically update sessions
+let g:startify_session_persistence = 1
+let g:startify_fortune_use_unicode = 1
+" Sort sessions by modification time
+let g:startify_session_sort = 1
+let g:startify_session_before_save = [
+    \ 'echo "Cleaning up before saving.."',
+    \ 'silent! NERDTreeTabsClose'
+    \ ]
+
+let g:startify_bookmarks = [
+        \ { 'init': '~/.config/nvim/init.vim' },
+        \ { 'proj': '~/Projects' },
+        \ ]
 " ====================================================================================== COC
 " gd - go to definition of word under cursor
 nmap <silent> gd <Plug>(coc-definition)
@@ -122,7 +140,7 @@ let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -
 let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
 let g:ale_c_parse_makefile=1
 
-let g:ale_python_flake8_options= "--ignore=E221" " Ignore
+let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
 let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
