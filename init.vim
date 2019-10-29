@@ -4,8 +4,10 @@ set t_Co=256
 " ================================================================================= VIM-PLUG
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
+" ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'https://github.com/kshenoy/vim-signature'
+" ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
 
@@ -32,6 +34,8 @@ Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX        
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
 
+" Initialize plugin system
+call plug#end()
 
 " ================================================================================= STARTIFY
 " Automatically update sessions
@@ -71,8 +75,6 @@ nmap <leader>cf  <Plug>(coc-format-selected)
 vmap <leader>cf  <Plug>(coc-format-selected)
 
 " =========================================================================== COC-TRANSLATOR
-" Initialize plugin system
-call plug#end()
 " popup
 nmap <Leader>t <Plug>(coc-translator-p)
 " echo
