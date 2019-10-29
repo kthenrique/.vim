@@ -143,6 +143,8 @@ let g:ale_fixers = {
 let g:ale_c_gcc_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
+let g:ale_c_clang_executable="clang-8"
+let g:ale_cpp_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
 let g:ale_cpp_clangtidy_executable="clang-tidy-8"
 
