@@ -11,7 +11,5 @@
 #ifndef _H
 #define _H
 
-#include<>
-
 #endif
 /** EOF */
