@@ -311,25 +311,27 @@ set background=dark
 colo gruvbox
 
 " ============================================================================ SET SKELETONS
-autocmd BufNewFile  *.m	          0r ~/.config/nvim/skeleton/skeleton.m
-autocmd BufNewFile  *.tex         0r ~/.config/nvim/skeleton/skeleton.tex
-autocmd BufNewFile  *.vhd         0r ~/.config/nvim/skeleton/skeleton.vhd
-autocmd BufNewFile  *.v           0r ~/.config/nvim/skeleton/skeleton.v
-autocmd BufNewFile  *.asm         0r ~/.config/nvim/skeleton/skeleton.asm
-autocmd BufNewFile  *.s           0r ~/.config/nvim/skeleton/skeleton.asm
-autocmd BufNewFile  *.cpp	      0r ~/.config/nvim/skeleton/skeleton.cpp
-"autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton.c
-autocmd BufNewFile  *.c	          0r ~/.config/nvim/skeleton/skeleton_doxy.c
-autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton_doxy.h
-"autocmd BufNewFile  *.h	          0r ~/.config/nvim/skeleton/skeleton.h
-autocmd BufNewFile  *.adoc        0r ~/.config/nvim/skeleton/skeleton.adoc
-autocmd BufNewFile  *.py          0r ~/.config/nvim/skeleton/skeleton.py
+autocmd BufNewFile  *.m	           0r ~/.config/nvim/skeleton/skeleton.m
+autocmd BufNewFile  *.tex          0r ~/.config/nvim/skeleton/skeleton.tex
+autocmd BufNewFile  *.vhd          0r ~/.config/nvim/skeleton/skeleton.vhd
+autocmd BufNewFile  *.v            0r ~/.config/nvim/skeleton/skeleton.v
+autocmd BufNewFile  *.asm          0r ~/.config/nvim/skeleton/skeleton.asm
+autocmd BufNewFile  *.s            0r ~/.config/nvim/skeleton/skeleton.asm
+autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton.cpp
+"autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton.c
+autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton_doxy.c
+autocmd BufNewFile  *.h	           0r ~/.config/nvim/skeleton/skeleton_doxy.h
+"autocmd BufNewFile  *.h	           0r ~/.config/nvim/skeleton/skeleton.h
+autocmd BufNewFile  *.adoc         0r ~/.config/nvim/skeleton/skeleton.adoc
+autocmd BufNewFile  *.py           0r ~/.config/nvim/skeleton/skeleton.py
 
-autocmd BufNewFile  *.pro         0r ~/.config/nvim/skeleton/skeleton.pro
-autocmd BufNewFile  .gitignore    0r ~/.config/nvim/skeleton/skeleton.gitignore
-autocmd BufNewFile  .clang-format 0r ~/.config/nvim/skeleton/skeleton.clang-format
+autocmd BufNewFile  *.pro          0r ~/.config/nvim/skeleton/skeleton.pro
+autocmd BufNewFile  .gitignore     0r ~/.config/nvim/skeleton/skeleton.gitignore
+autocmd BufNewFile  .clang-format  0r ~/.config/nvim/skeleton/skeleton.clang-format
+autocmd BufNewFile  .ccls          0r ~/.config/nvim/skeleton/skeleton.ccls
+autocmd BufNewFile  .nvimrc        0r ~/.config/nvim/skeleton/skeleton.nvimrc
 autocmd BufNewFile  CMakeLists.txt 0r ~/.config/nvim/skeleton/CMakeLists.txt
-autocmd BufNewFile  Makefile      0r ~/.config/nvim/skeleton/Makefile
+autocmd BufNewFile  Makefile       0r ~/.config/nvim/skeleton/Makefile
 
 " ========================================================================== UPDATE SKELETON
 autocmd BufWritePre ks|call UpSkel()|'s         " Updating skeleton
