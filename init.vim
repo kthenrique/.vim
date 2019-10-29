@@ -48,6 +48,9 @@ let g:startify_bookmarks = [
         \ { 'init': '~/.config/nvim/init.vim' },
         \ { 'proj': '~/Projects' },
         \ ]
+
+let g:startify_files_number = 5
+
 " ====================================================================================== COC
 " gd - go to definition of word under cursor
 nmap <silent> gd <Plug>(coc-definition)
@@ -120,8 +123,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-  \   'c'       : ['gcc', 'clang', 'cppcheck'],
-  \   'cpp'     : ['make', 'gcc', 'clang', 'cppcheck'],
+  \   'c'       : ['clangtidy', 'cppcheck', 'gcc', 'clang'],
+  \   'cpp'     : ['clangtidy', 'cppcheck', 'gcc', 'clang'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
@@ -135,14 +138,19 @@ let g:ale_fixers = {
   \}
 
 "java  'checkstyle'],
-let g:ale_c_gcc_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
-let g:ale_c_clang_options= "-Wpedantic -Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
+let g:ale_c_gcc_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
+let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
+let g:ale_c_clangtidy_executable="clang-tidy-8"
+let g:ale_cpp_clangtidy_executable="clang-tidy-8"
+
 let g:ale_c_parse_makefile=1
+let g:ale_c_parse_compile_commands=1
 
 let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
 let g:ale_fix_on_save=1
+
 "let g:ale_lint_on_save=1
 
 " ============================================================================ LIGHTLINE-ALE

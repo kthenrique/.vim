@@ -2,7 +2,8 @@
     "coc": {
         "preferences": {
             "diagnostic": {
-                "displayByAle":true
+                "displayByAle":true,
+                "virtualText":true
             }
         }
     },
@@ -62,6 +63,7 @@
         "toLang": "de",
         "engines": ["bing", "google"]
     },
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
@@ -70,9 +72,11 @@
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
+                },
+                "clang": {
+                    "extraArgs": [""]
                 }
             }
         }
     }
-
 }
