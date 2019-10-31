@@ -125,8 +125,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-  \   'c'       : ['clangtidy', 'cppcheck', 'gcc', 'clang'],
-  \   'cpp'     : ['clangtidy', 'cppcheck', 'gcc', 'clang'],
+  \   'c'       : ['clangtidy', 'cppcheck', 'gcc'],
+  \   'cpp'     : ['clangtidy', 'cppcheck', 'gcc'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
@@ -153,15 +153,14 @@ let g:ale_c_parse_compile_commands=1
 
 let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
-let g:ale_fix_on_save=1
-
+"let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
 
 " ============================================================================ LIGHTLINE-ALE
 let g:lightline#ale#indicator_checking = "\uf110 ..."
 let g:lightline#ale#indicator_warnings = "\uf071: "
 let g:lightline#ale#indicator_errors   = "\uf05e: "
-let g:lightline#ale#indicator_ok       = "\uf00c: "
+let g:lightline#ale#indicator_ok       = "\uf00c"
 
 " ================================================================================ ULTISNIPS
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
