@@ -73,8 +73,14 @@
                 "cache": {
                     "directory": "/tmp/ccls"
                 },
+                "Diagnostics": {
+                    "onSave": 0,
+                    "onChange": 1000,
+                    "onOpen": 0
+                },
                 "clang": {
-                    "extraArgs": [""]
+                    "resourceDir": "/usr/lib/llvm-8/lib/clang/8.0.0",
+                    "extraArgs": ["-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc"]
                 }
             }
         }
