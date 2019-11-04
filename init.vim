@@ -6,7 +6,6 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
-Plug 'https://github.com/kshenoy/vim-signature'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -15,21 +14,22 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC            
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
 Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
-Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
+"Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
 "Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
 
 Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
+
 Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
   Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
 Plug 'https://github.com/nelstrom/vim-visual-star-search.git'  " VISUAL-STAR      : search words in visual
-Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
+"Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 
 Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
   Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
-Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags
+Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags & code symbols
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
 Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
@@ -56,23 +56,21 @@ let g:startify_bookmarks = [
 let g:startify_files_number = 5
 
 " ====================================================================================== COC
-" gd - go to definition of word under cursor
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+" gr - show a list of references made
+nmap <silent> gr <Plug>(coc-references)
+
 " gh - get hint on whatever's under the cursor
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
 " rename the current word in the cursor
 nmap <leader>cr  <Plug>(coc-rename)
-nmap <leader>cf  <Plug>(coc-format-selected)
-vmap <leader>cf  <Plug>(coc-format-selected)
 
 " =========================================================================== COC-TRANSLATOR
 " popup
@@ -135,21 +133,27 @@ let g:ale_linters = {
   \}
 let g:ale_fixers = {
   \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
-  \   'c'     : ['clang-format'],
-  \   'cpp'   : ['clang-format'],
+  \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
+  \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \}
 
 "java  'checkstyle'],
-let g:ale_c_gcc_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
+
+" C Options 
+let g:ale_c_gcc_options= "-pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
 let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
 let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
 let g:ale_c_clang_executable="clang-8"
-let g:ale_cpp_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
+
+" Cpp Options 
+let g:ale_cpp_clang_executable="clang-8"
 let g:ale_cpp_clangtidy_executable="clang-tidy-8"
 
+" C & Cpp
 let g:ale_c_parse_makefile=1
 let g:ale_c_parse_compile_commands=1
+let g:ale_c_clangformat_executable="clang-format-8"
 
 let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
@@ -187,13 +191,13 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " ================================================================================= GEN-TAGS
-let g:gen_tags#gtags_auto_gen=1
-let g:gen_tags#gtags_auto_update=1
-let g:gen_tags#ctags_auto_gen=1
-let g:gen_tags#ctags_auto_update=1
-
-" Disable preview on Scratch of Omnifunction
-set completeopt-=preview
+"let g:gen_tags#gtags_auto_gen=1
+"let g:gen_tags#gtags_auto_update=1
+"let g:gen_tags#ctags_auto_gen=1
+"let g:gen_tags#ctags_auto_update=1
+"
+"" Disable preview on Scratch of Omnifunction
+"set completeopt-=preview
 
 " =========================================================== SET THE STATUSLINE [LIGHTLINE]
 set laststatus=2
@@ -207,13 +211,12 @@ let g:lightline = {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus', 'currentfunction' ] ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
       \   'left':  [ [ 'mode', 'paste', 'coc' ],
       \              [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
       \ },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
-      \   'currentfunction': 'CocCurrentFunction',
       \   'cocstatus': 'coc#status',
       \ },
       \ 'component_expand': {
