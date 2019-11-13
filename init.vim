@@ -19,8 +19,8 @@ Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE        
 
 Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
 
-Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
-  Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
+"Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
+  "Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection

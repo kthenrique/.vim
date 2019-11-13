@@ -1,6 +1,6 @@
 set autoindent     " align the new line indent with the previous line
 set textwidth=82   " max character in a line before auto breaking
-set tags+=.tivatags
+set tags+=~/.config/nvim/tags/tiva_2_1_4_178
 
 let g:ale_linters = {
   \   'c'       : ['clangtidy', 'cppcheck', 'gcc', 'clang'],
