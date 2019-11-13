@@ -72,6 +72,9 @@ endfunction
 " rename the current word in the cursor
 nmap <leader>cr  <Plug>(coc-rename)
 
+" For diagnostic messages
+set updatetime=300
+
 " =========================================================================== COC-TRANSLATOR
 " popup
 nmap <Leader>t <Plug>(coc-translator-p)
