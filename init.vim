@@ -72,6 +72,16 @@ endfunction
 " rename the current word in the cursor
 nmap <leader>cr  <Plug>(coc-rename)
 
+let g:coc_global_extensions=[
+            \ 'coc-java',
+            \ 'coc-python',
+            \ 'coc-json',
+            \ 'coc-xml',
+            \ 'coc-html',
+            \ 'coc-marketplace',
+            \ 'coc-translator',
+            \ ]
+
 " For diagnostic messages
 set updatetime=300
 
