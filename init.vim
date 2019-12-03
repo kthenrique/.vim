@@ -53,6 +53,8 @@ let g:startify_bookmarks = [
 
 let g:startify_files_number = 5
 
+let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
+
 " ====================================================================================== COC
 " gr - show a list of references made
 nmap <silent> gr <Plug>(coc-references)
@@ -224,7 +226,7 @@ let g:lightline = {
       \              [ 'fileencoding', 'filetype' ],
       \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
       \   'left':  [ [ 'mode', 'paste', 'coc' ],
-      \              [ 'readonly', 'absolutepath', 'spell', 'tagbar' ] ]
+      \              [ 'readonly', 'spell', 'tagbar' ] ]
       \ },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
@@ -334,7 +336,9 @@ autocmd BufNewFile  *.vhd          0r ~/.config/nvim/skeleton/skeleton.vhd
 autocmd BufNewFile  *.v            0r ~/.config/nvim/skeleton/skeleton.v
 autocmd BufNewFile  *.asm          0r ~/.config/nvim/skeleton/skeleton.asm
 autocmd BufNewFile  *.s            0r ~/.config/nvim/skeleton/skeleton.asm
-autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton.cpp
+autocmd BufNewFile  *.java	       0r ~/.config/nvim/skeleton/skeleton.java
+"autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton.cpp
+autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton_doxy.cpp
 "autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton.c
 autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton_doxy.c
 autocmd BufNewFile  *.h	           0r ~/.config/nvim/skeleton/skeleton_doxy.h
