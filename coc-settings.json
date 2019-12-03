@@ -1,6 +1,7 @@
 {
     "coc": {
         "preferences": {
+            "extensionsUpdateCheck":"daily",
             "diagnostic": {
                 "displayByAle":true,
                 "virtualText":true
@@ -60,7 +61,7 @@
         "enable":false
     },
     "translator": {
-        "toLang": "de",
+        "toLang": "en",
         "engines": ["bing", "google"]
     },
 
@@ -84,5 +85,14 @@
                 }
             }
         }
-    }
+    },
+
+    "java.referencesCodeLens.enabled":true,
+    "java.implementationsCodeLens.enabled": true,
+    "java.signatureHelp.enabled":true,
+    "java.progressReports.enabled":true,
+    "java.format.comments.enabled": true,
+    "java.format.onType.enabled": true,
+    "java.completion.enabled": true,
+    "java.foldingRange.enabled": true
 }
