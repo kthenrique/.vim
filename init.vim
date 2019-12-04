@@ -19,6 +19,8 @@ Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE        
 
 Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
 
+"Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
+  "Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
 "Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
@@ -514,12 +516,6 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 " Don't jump rightway when using * and #
 nnoremap * *N
 nnoremap # #N
-
-" Grep
-" Use grep from inside vim
-command! -nargs=+ Grep execute 'silent grep! -R -I -s -n --exclude *.{squash,pyc} . -e <args>' | copen | execute 'silent /<args>'
-" shift-control-* Greps for the word under the cursor
-nmap <leader>g :Grep <c-r>=expand("<cword>")<cr><cr>
 
 " ================================================== FILE PATTERNS TO IGNORE WHILE EXPANDING
 set wildignore+=*.a,*.o,*.elf,*.out,*.bin
