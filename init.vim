@@ -6,6 +6,7 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
+Plug 'https://github.com/richq/vim-cmake-completion.git'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -138,8 +139,8 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-  \   'c'       : ['clangtidy', 'cppcheck', 'gcc'],
-  \   'cpp'     : ['clangtidy', 'cppcheck', 'gcc'],
+  \   'c'       : ['cppcheck', 'gcc', 'clang'],
+  \   'cpp'     : ['clangtidy', 'gcc'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'vhdl'    : ['vcom'],
@@ -154,25 +155,31 @@ let g:ale_fixers = {
 
 "java  'checkstyle'],
 
-" C Options 
-let g:ale_c_gcc_options= "-pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
-let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow "
-let g:ale_c_clangformat_options= "--style=file --fallback-style=webkit"
+" C Options
+let g:ale_c_gcc_options= "-Wall -pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
+let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized"
 let g:ale_c_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
+let g:ale_c_clangtidy_options=""
+let g:ale_c_clangtidy_extra_options="-checks=*"
+let g:ale_c_cppcheck_options="--enable=all --std=c99 --force"
 
-" Cpp Options 
+" Cpp Options
 let g:ale_cpp_clang_executable="clang-8"
 let g:ale_cpp_clangtidy_executable="clang-tidy-8"
+let g:ale_cpp_clangtidy_extra_options="-checks=*,-fuchsia-default-arguments,-readability-static-accessed-through-instance,-llvm-include-order,-llvm-header-guard"
+"*,-cert-dcl03-c,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-non-private-member-variables-in-classes,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-fuchsia-multiple-inheritance,-fuchsia-overloaded-operator,-fuchsia-statically-constructed-objects,-google-runtime-references,-hicpp-no-array-decay,-hicpp-static-assert,-misc-non-private-member-variables-in-classes,-misc-static-assert,-modernize-use-default-member-init,-readability-const-return-type,-readability-else-after-return,-readability-magic-numbers,-readability-named-parameter
+let g:ale_cpp_cppcheck_options="--enable=all --std=c++11 --force"
 
 " C & Cpp
 let g:ale_c_parse_makefile=1
 let g:ale_c_parse_compile_commands=1
 let g:ale_c_clangformat_executable="clang-format-8"
+let g:ale_c_clangformat_options= "--style=file --fallback-style=google"
 
 let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
-"let g:ale_fix_on_save=1
+" let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
 
 " ============================================================================ LIGHTLINE-ALE
