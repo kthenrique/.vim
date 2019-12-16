@@ -7,13 +7,13 @@
 Personal Neovim setup.
 
 == SETUP:
-  - Basics:
+=== Basics:
      * sudo -H pip3 install neovim
      * sudo apt install exuberant-ctags global
      * sudo apt install npm && sudo npm install -g neovim
      * sudo apt install xsel
      
-== LINTERS
+=== LINTERS
   - C/C++:
      * sudo snap ccls --classic
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
