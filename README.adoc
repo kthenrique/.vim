@@ -12,6 +12,7 @@ Personal Neovim setup.
      * sudo apt install exuberant-ctags global
      * sudo apt install npm && sudo npm install -g neovim
      * sudo apt install xsel
+     * nvim -c "PlugUpdate | :qa"
      
 === Linters
   - C/C++:
