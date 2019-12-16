@@ -13,7 +13,7 @@ Personal Neovim setup.
      * sudo apt install npm && sudo npm install -g neovim
      * sudo apt install xsel
      
-=== LINTERS
+=== Linters
   - C/C++:
      * sudo snap ccls --classic
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
