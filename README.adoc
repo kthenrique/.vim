@@ -8,7 +8,7 @@ Personal Neovim setup.
 
 == SETUP:
 === Basics:
-     * sudo -H pip3 install neovim
+     * sudo -H pip3 install pynvim
      * sudo apt install exuberant-ctags global
      * sudo apt install npm && sudo npm install -g neovim
      * sudo apt install xsel
