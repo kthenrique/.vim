@@ -345,7 +345,7 @@ autocmd BufNewFile  *.vhd          0r ~/.config/nvim/skeleton/skeleton.vhd
 autocmd BufNewFile  *.v            0r ~/.config/nvim/skeleton/skeleton.v
 autocmd BufNewFile  *.asm          0r ~/.config/nvim/skeleton/skeleton.asm
 autocmd BufNewFile  *.s            0r ~/.config/nvim/skeleton/skeleton.asm
-autocmd BufNewFile  *.java	       0r ~/.config/nvim/skeleton/skeleton.java
+autocmd BufNewFile  *.java	       0r ~/.config/nvim/skeleton/skeleton_doc.java
 "autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton.cpp
 autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton_doxy.cpp
 "autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton.c
