@@ -138,11 +138,14 @@ let g:ale_virtualtext_prefix = " \u2b9e "
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_linters_explicit = 1
+" Linters that should be enabled just before commits, because of their overhead:
+"   - c/c++ : 'cppcheck'
 let g:ale_linters = {
-  \   'c'       : ['cppcheck', 'gcc', 'clangtidy'],
-  \   'cpp'     : ['cppcheck', 'gcc', 'clangtidy'],
+  \   'c'       : ['gcc', 'clangtidy', 'flawfinder'],
+  \   'cpp'     : ['clangtidy', 'flawfinder'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
+  \   'java'    : ['checkstyle'],
   \   'vhdl'    : ['vcom'],
   \   'sh'      : ['shellcheck'],
   \   'cmake'   : ['cmakelint'],
@@ -152,8 +155,6 @@ let g:ale_fixers = {
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \}
-
-"java  'checkstyle'],
 
 " C Options
 let g:ale_c_gcc_options= "-Wall -pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
