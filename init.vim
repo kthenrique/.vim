@@ -142,7 +142,7 @@ let g:ale_linters_explicit = 1
 "   - c/c++ : 'cppcheck'
 let g:ale_linters = {
   \   'c'       : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'cpp'     : ['clangtidy', 'flawfinder'],
+  \   'cpp'     : ['gcc', 'clangtidy', 'flawfinder'],
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'java'    : ['checkstyle'],
@@ -151,6 +151,7 @@ let g:ale_linters = {
   \   'cmake'   : ['cmakelint'],
   \}
 let g:ale_fixers = {
+  \   'cmake' : ['remove_trailing_lines', 'trim_whitespace'],
   \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
@@ -158,12 +159,12 @@ let g:ale_fixers = {
 
 " C Options
 let g:ale_c_gcc_options= "-Wall -pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
-let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized"
+let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized "
 let g:ale_c_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
 let g:ale_c_clangtidy_options=""
 let g:ale_c_clangtidy_extra_options="-checks=*"
-let g:ale_c_cppcheck_options="--enable=all --std=c99 --force"
+let g:ale_c_cppcheck_options="--enable=all -v --std=c99 --force"
 
 " Cpp Options
 let g:ale_cpp_clang_executable="clang-8"
@@ -180,7 +181,7 @@ let g:ale_c_clangformat_options= "--style=file --fallback-style=google"
 
 let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
 
-" let g:ale_fix_on_save=1
+"let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
 
 " ============================================================================ LIGHTLINE-ALE
