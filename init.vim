@@ -76,6 +76,9 @@ endfunction
 nmap <leader>cr  <Plug>(coc-rename)
 
 let g:coc_global_extensions=[
+            \ 'coc-rls',
+            \ 'coc-spell-checker',
+            \ 'coc-texlab',
             \ 'coc-java',
             \ 'coc-python',
             \ 'coc-json',
@@ -146,10 +149,12 @@ let g:ale_linters = {
   \   'verilog' : ['iverilog'],
   \   'python'  : ['flake8'],
   \   'java'    : ['checkstyle'],
+  \   'rust'    : ['cargo', 'rls', 'rustc'],
   \   'vhdl'    : ['vcom'],
   \   'sh'      : ['shellcheck'],
   \   'cmake'   : ['cmakelint'],
   \}
+
 let g:ale_fixers = {
   \   'cmake' : ['remove_trailing_lines', 'trim_whitespace'],
   \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
@@ -325,6 +330,7 @@ let g:DVB_TrimWS = 1
 " ================================================================================== TAG BAR
 nnoremap <silent> <F3> :TagbarOpenAutoClose<CR>
 let g:tagbar_sort = 0 " sort according to the order in source file
+let g:tagbar_compact = 1
 
 " ================================================================================= NERDTREE
 map <silent> <F2> :NERDTreeToggle<CR>

@@ -65,6 +65,14 @@
         "engines": ["bing", "google"]
     },
 
+    "cSpell.enabled": true,
+    "cSpell.showStatus": false,
+    "cSpell.words": [],
+    "cSpell.allowCompoundWords": false,
+    "cSpell.ignoreWords": ["behaviour"],
+    "cSpell.userWords": [],
+    "cSpell.spellCheckDelayMs": 50,
+
     "languageserver": {
         "ccls": {
             "command": "ccls",
