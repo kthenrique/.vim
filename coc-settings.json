@@ -12,43 +12,43 @@
     "python": {
         "setInterpreter":"/usr/bin/python3",
         "linting": {
-            "enabled":false
+            "enabled":true
         },
         "plugins": {
           "jedi_completion": {
-            "enabled": true
+            "enabled":true
           },
           "jedi_hover": {
-            "enabled": true
+            "enabled":true
           },
           "jedi_references": {
-            "enabled": true
+            "enabled":true
           },
           "jedi_signature_help": {
-            "enabled": true
+            "enabled":true
           },
           "jedi_symbols": {
-            "enabled": true,
-            "all_scopes": true
+            "enabled":true,
+            "all_scopes":true
           },
           "mccabe": {
-            "enabled": true,
+            "enabled":true,
             "threshold": 15
           },
           "preload": {
-            "enabled": true
+            "enabled":true
           },
           "pycodestyle": {
-            "enabled": true
+            "enabled":true
           },
           "pyflakes": {
-            "enabled": true
+            "enabled":true
           },
           "rope_completion": {
-            "enabled": true
+            "enabled":true
           },
           "yapf": {
-            "enabled": true
+            "enabled":true
           }
         }
     },
@@ -65,13 +65,13 @@
         "engines": ["bing", "google"]
     },
 
-    "cSpell.enabled": true,
-    "cSpell.showStatus": false,
+    "cSpell.enabled":true,
+    "cSpell.showStatus":false,
     "cSpell.words": [],
-    "cSpell.allowCompoundWords": false,
+    "cSpell.allowCompoundWords":false,
     "cSpell.ignoreWords": ["behaviour"],
     "cSpell.userWords": [],
-    "cSpell.spellCheckDelayMs": 50,
+    "cSpell.spellCheckDelayMs":50,
 
     "languageserver": {
         "ccls": {
@@ -89,18 +89,26 @@
                 },
                 "clang": {
                     "resourceDir": "/usr/lib/llvm-8/lib/clang/8.0.0",
-                    "extraArgs": ["-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc"]
+                    "extraArgs": ["-Wall", "-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc", "-fsanitize=address", "-fno-omit-frame-pointer", "-g"]
                 }
             }
         }
     },
 
     "java.referencesCodeLens.enabled":true,
-    "java.implementationsCodeLens.enabled": true,
+    "java.implementationsCodeLens.enabled":true,
+
     "java.signatureHelp.enabled":true,
     "java.progressReports.enabled":true,
-    "java.format.comments.enabled": true,
-    "java.format.onType.enabled": true,
-    "java.completion.enabled": true,
-    "java.foldingRange.enabled": true
+
+    "java.codeGeneration.generateComments":true,
+    "java.codeGeneration.useBlocks":true,
+
+    "java.format.enabled":true,
+    "java.format.comments.enabled":true,
+    "java.format.onType.enabled":true,
+
+    "java.completion.enabled":true,
+    "java.foldingRange.enabled":true
+
 }
