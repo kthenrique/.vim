@@ -122,6 +122,11 @@ command GrammarousNext     execute "normal \<Plug>(grammarous-move-to-next-error
 " Move cursor to the previous error
 command GrammarousPrevious execute "normal \<Plug>(grammarous-move-to-previous-error)"
 
+" ================================================================================ GITGUTTER
+let g:gitgutter_max_signs=800
+" highlight the line numbers for changed lines
+let g:gitgutter_highlight_linenrs = 1
+
 " ====================================================================================== ALE
 highlight link ALEVirtualTextError ErrorMsg
 highlight link ALEVirtualTextInfo SpellLocal
@@ -147,7 +152,7 @@ let g:ale_linters = {
   \   'c'       : ['gcc', 'clangtidy', 'flawfinder'],
   \   'cpp'     : ['gcc', 'clangtidy', 'flawfinder'],
   \   'verilog' : ['iverilog'],
-  \   'python'  : ['flake8'],
+  \   'python'  : ['flake8', 'bandit'],
   \   'java'    : ['checkstyle'],
   \   'rust'    : ['cargo', 'rls', 'rustc'],
   \   'vhdl'    : ['vcom'],
@@ -156,15 +161,16 @@ let g:ale_linters = {
   \}
 
 let g:ale_fixers = {
-  \   'cmake' : ['remove_trailing_lines', 'trim_whitespace'],
   \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'cmake' : ['remove_trailing_lines', 'trim_whitespace'],
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
+  \   'python': ['remove_trailing_lines', 'trim_whitespace', 'isort'],
   \}
 
 " C Options
 let g:ale_c_gcc_options= "-Wall -pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
-let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized "
+let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized -fsanitize=address -fno-omit-frame-pointer "
 let g:ale_c_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
 let g:ale_c_clangtidy_options=""
@@ -173,6 +179,7 @@ let g:ale_c_cppcheck_options="--enable=all -v --std=c99 --force"
 
 " Cpp Options
 let g:ale_cpp_clang_executable="clang-8"
+let g:ale_cpp_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized -fsanitize=address -fno-omit-frame-pointer "
 let g:ale_cpp_clangtidy_executable="clang-tidy-8"
 let g:ale_cpp_clangtidy_extra_options="-checks=*,-fuchsia-default-arguments,-readability-static-accessed-through-instance,-llvm-include-order,-llvm-header-guard"
 "*,-cert-dcl03-c,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-non-private-member-variables-in-classes,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-fuchsia-multiple-inheritance,-fuchsia-overloaded-operator,-fuchsia-statically-constructed-objects,-google-runtime-references,-hicpp-no-array-decay,-hicpp-static-assert,-misc-non-private-member-variables-in-classes,-misc-static-assert,-modernize-use-default-member-init,-readability-const-return-type,-readability-else-after-return,-readability-magic-numbers,-readability-named-parameter
