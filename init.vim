@@ -149,24 +149,31 @@ let g:ale_linters_explicit = 1
 " Linters that should be enabled just before commits, because of their overhead:
 "   - c/c++ : 'cppcheck'
 let g:ale_linters = {
-  \   'c'       : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'cpp'     : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'verilog' : ['iverilog'],
-  \   'python'  : ['flake8', 'bandit'],
-  \   'java'    : ['checkstyle'],
-  \   'rust'    : ['cargo', 'rls', 'rustc'],
-  \   'vhdl'    : ['vcom'],
-  \   'sh'      : ['shellcheck'],
-  \   'cmake'   : ['cmakelint'],
+  \   'c'         : ['gcc', 'clangtidy', 'flawfinder'],
+  \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder'],
+  \   'verilog'   : ['iverilog'],
+  \   'python'    : ['flake8', 'bandit'],
+  \   'java'      : ['checkstyle'],
+  \   'rust'      : ['cargo', 'rls', 'rustc'],
+  \   'vhdl'      : ['vcom'],
+  \   'sh'        : ['shellcheck'],
+  \   'dockerfile': ['hadolint'],
+  \   'cmake'     : ['cmakelint'],
   \}
 
 let g:ale_fixers = {
   \   '*'     : ['remove_trailing_lines', 'trim_whitespace'],
-  \   'cmake' : ['remove_trailing_lines', 'trim_whitespace'],
+  \   'cmake' : ['remove_trailing_lines', 'trim_whitespace', 'cmakeformat'],
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'python': ['remove_trailing_lines', 'trim_whitespace', 'isort'],
+  \   'java'  : ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
   \}
+
+" Java
+" Doing a trick to make it work as I'm using a *.jar here
+let g:ale_java_google_java_format_executable="java"
+let g:ale_java_google_java_format_options="-jar /opt/google-java-format.jar"
 
 " C Options
 let g:ale_c_gcc_options= "-Wall -pipe -Wpedantic -Wextra -Wmissing-prototypes -Wshadow -fsanitize=undefined -fsanitize=address "
