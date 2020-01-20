@@ -20,8 +20,11 @@ Personal Neovim setup.
      * sudo snap ccls --classic
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
   
+  - Python3:
+     * sudo -H pip3 install jedi flake8 bandit
+  
   - Cmake:
      * sudo -H pip3 install cmake-format cmakelint
   
-  - Python3:
-     * sudo -H pip3 install jedi flake8 bandit
+  - sh:
+     * sudo apt install shellcheck
