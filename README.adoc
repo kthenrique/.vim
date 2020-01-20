@@ -22,7 +22,7 @@ Personal Neovim setup.
      * sudo apt install flawfinder
   
   - Python3:
-     * sudo -H pip3 install jedi flake8 bandit
+     * sudo -H pip3 install jedi flake8 bandit isort
   
   - Cmake:
      * sudo -H pip3 install cmake-format cmakelint
