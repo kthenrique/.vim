@@ -19,6 +19,7 @@ Personal Neovim setup.
   - C/C++:
      * sudo snap ccls --classic
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
+     * sudo apt install flawfinder
   
   - Python3:
      * sudo -H pip3 install jedi flake8 bandit
