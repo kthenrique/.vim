@@ -1,7 +1,7 @@
 = NEOVIM SETUP
 :Author: Kelve T. Henrique 
 :Email: kelvehenrique@pm.me
-:Date: 2019 Dec 16
+:Date: 2020 Jan 20
 :description: Steps to setup neovim in new Ubuntu machines
 
 Personal Neovim setup.
@@ -15,7 +15,15 @@ Personal Neovim setup.
      * sudo apt install xsel
      * nvim -c "PlugUpdate | :qa"
      
-=== Linters
+=== Linters & Fixers
   - C/C++:
      * sudo snap ccls --classic
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
+  
+  - Cmake:
+     * sudo -H pip3 install cmake-format cmakelint
+  
+  - Python3:
+     * sudo -H pip3 install jedi
+     * sudo -H pip3 install flake8 bandit
+     * sudo -H pip3 install pynvim
