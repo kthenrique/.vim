@@ -24,6 +24,4 @@ Personal Neovim setup.
      * sudo -H pip3 install cmake-format cmakelint
   
   - Python3:
-     * sudo -H pip3 install jedi
-     * sudo -H pip3 install flake8 bandit
-     * sudo -H pip3 install pynvim
+     * sudo -H pip3 install jedi flake8 bandit
