@@ -92,7 +92,15 @@
                     "extraArgs": ["-Wall", "-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc", "-fsanitize=address", "-fno-omit-frame-pointer", "-g"]
                 }
             }
+        },
+        
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
         }
+
     },
 
     "java.referencesCodeLens.enabled":true,
