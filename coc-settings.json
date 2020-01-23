@@ -15,41 +15,41 @@
             "enabled":true
         },
         "plugins": {
-          "jedi_completion": {
-            "enabled":true
-          },
-          "jedi_hover": {
-            "enabled":true
-          },
-          "jedi_references": {
-            "enabled":true
-          },
-          "jedi_signature_help": {
-            "enabled":true
-          },
-          "jedi_symbols": {
-            "enabled":true,
-            "all_scopes":true
-          },
-          "mccabe": {
-            "enabled":true,
-            "threshold": 15
-          },
-          "preload": {
-            "enabled":true
-          },
-          "pycodestyle": {
-            "enabled":true
-          },
-          "pyflakes": {
-            "enabled":true
-          },
-          "rope_completion": {
-            "enabled":true
-          },
-          "yapf": {
-            "enabled":true
-          }
+            "jedi_completion": {
+                "enabled": true
+            },
+            "jedi_hover": {
+                "enabled": true
+            },
+            "jedi_references": {
+                "enabled": true
+            },
+            "jedi_signature_help": {
+                "enabled": true
+            },
+            "jedi_symbols": {
+                "enabled": true,
+                "all_scopes": true
+            },
+            "mccabe": {
+                "enabled": true,
+                "threshold": 15
+            },
+            "preload": {
+                "enabled": true
+            },
+            "pycodestyle": {
+                "enabled": true
+            },
+            "pyflakes": {
+                "enabled": true
+            },
+            "rope_completion": {
+                "enabled": true
+            },
+            "yapf": {
+                "enabled": true
+            }
         }
     },
 
@@ -65,10 +65,11 @@
         "engines": ["bing", "google"]
     },
 
-    "cSpell.enabled":true,
-    "cSpell.showStatus":false,
+    "cSpell.enabled": true,
+    "cSpell.enabledLanguageIds": ["asciidoc","text","git-commit"],
+    "cSpell.showStatus": false,
     "cSpell.words": [],
-    "cSpell.allowCompoundWords":false,
+    "cSpell.allowCompoundWords": true,
     "cSpell.ignoreWords": ["behaviour"],
     "cSpell.userWords": [],
     "cSpell.spellCheckDelayMs":50,
@@ -77,7 +78,7 @@
         "ccls": {
             "command": "ccls",
             "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".root"],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
@@ -93,30 +94,28 @@
                 }
             }
         },
-        
+
         "bash": {
             "command": "bash-language-server",
             "args": ["start"],
             "filetypes": ["sh"],
             "ignoredRootPaths": ["~"]
         }
-
     },
 
-    "java.referencesCodeLens.enabled":true,
-    "java.implementationsCodeLens.enabled":true,
+    "java.referencesCodeLens.enabled": true,
+    "java.implementationsCodeLens.enabled": true,
 
-    "java.signatureHelp.enabled":true,
-    "java.progressReports.enabled":true,
+    "java.signatureHelp.enabled": true,
+    "java.progressReports.enabled": true,
 
-    "java.codeGeneration.generateComments":true,
-    "java.codeGeneration.useBlocks":true,
+    "java.codeGeneration.generateComments": true,
+    "java.codeGeneration.useBlocks": true,
 
-    "java.format.enabled":true,
-    "java.format.comments.enabled":true,
-    "java.format.onType.enabled":true,
+    "java.format.enabled": true,
+    "java.format.comments.enabled": true,
+    "java.format.onType.enabled": true,
 
-    "java.completion.enabled":true,
-    "java.foldingRange.enabled":true
-
+    "java.completion.enabled": true,
+    "java.foldingRange.enabled": true
 }
