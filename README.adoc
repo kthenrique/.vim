@@ -29,3 +29,4 @@ Personal Neovim setup.
   
   - sh:
      * sudo apt install shellcheck
+     * sudo npm i -g bash-language-server
