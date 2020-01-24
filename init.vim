@@ -235,11 +235,11 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " ================================================================================= GEN-TAGS
-"let g:gen_tags#gtags_auto_gen=1
-"let g:gen_tags#gtags_auto_update=1
-"let g:gen_tags#ctags_auto_gen=1
-"let g:gen_tags#ctags_auto_update=1
-"
+let g:gen_tags#gtags_auto_gen=1
+let g:gen_tags#gtags_auto_update=1
+let g:gen_tags#ctags_auto_gen=1
+let g:gen_tags#ctags_auto_update=1
+
 "" Disable preview on Scratch of Omnifunction
 "set completeopt-=preview
 
