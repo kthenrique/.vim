@@ -6,7 +6,6 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
-Plug 'https://github.com/richq/vim-cmake-completion.git'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -77,15 +76,16 @@ nmap <leader>cr  <Plug>(coc-rename)
 
 let g:coc_global_extensions=[
             \ 'coc-rls',
-            \ 'coc-spell-checker',
-            \ 'coc-texlab',
             \ 'coc-java',
             \ 'coc-python',
             \ 'coc-json',
             \ 'coc-xml',
             \ 'coc-html',
-            \ 'coc-marketplace',
+            \ 'coc-texlab',
+            \ 'coc-docker',
+            \ 'coc-spell-checker',
             \ 'coc-translator',
+            \ 'coc-marketplace',
             \ ]
 
 " For diagnostic messages

@@ -17,7 +17,7 @@ Personal Neovim setup.
      
 === Linters & Fixers
   - C/C++:
-     * sudo snap ccls --classic
+     * sudo snap ccls --classic # It's better to build it manually
      * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
      * sudo apt install flawfinder
   
@@ -25,7 +25,7 @@ Personal Neovim setup.
      * sudo -H pip3 install jedi flake8 bandit isort
   
   - Cmake:
-     * sudo -H pip3 install cmake-format cmakelint
+     * sudo -H pip3 install cmake_format cmakelint cmake-language-server
   
   - sh:
      * sudo apt install shellcheck

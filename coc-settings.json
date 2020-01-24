@@ -87,10 +87,6 @@
                     "onSave": 0,
                     "onChange": 1000,
                     "onOpen": 0
-                },
-                "clang": {
-                    "resourceDir": "/usr/lib/llvm-8/lib/clang/8.0.0",
-                    "extraArgs": ["-Wall", "-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc", "-fsanitize=address", "-fno-omit-frame-pointer", "-g"]
                 }
             }
         },
@@ -100,6 +96,17 @@
             "args": ["start"],
             "filetypes": ["sh"],
             "ignoredRootPaths": ["~"]
+        },
+
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": ["cmake"],
+            "rootPatterns": [
+                "build/"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
         }
     },
 
