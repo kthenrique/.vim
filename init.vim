@@ -151,8 +151,8 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
   \   'c'         : ['gcc', 'clangtidy', 'flawfinder'],
   \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'verilog'   : ['iverilog'],
   \   'python'    : ['flake8', 'bandit'],
+  \   'verilog'   : ['iverilog'],
   \   'java'      : ['checkstyle'],
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
@@ -166,7 +166,7 @@ let g:ale_fixers = {
   \   'cmake' : ['remove_trailing_lines', 'trim_whitespace', 'cmakeformat'],
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
-  \   'python': ['remove_trailing_lines', 'trim_whitespace', 'isort'],
+  \   'python': ['remove_trailing_lines', 'trim_whitespace'],
   \   'java'  : ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
   \}
 
@@ -179,7 +179,6 @@ let g:ale_java_google_java_format_options="-jar /opt/google-java-format.jar"
 let g:ale_c_clang_executable="clang-8"
 let g:ale_c_clangtidy_executable="clang-tidy-8"
 let g:ale_c_gcc_options= " -Wall -Werror -pipe -Wpedantic -Wextra -Wwrite-strings -Wformat-nonliteral -Wformat-security -Wbad-function-cast -Wcast-qual -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wshadow -fsanitize=undefined -fsanitize=address -Wmissing-format-attribute -Winline -Wmissing-format-attribute "
-let g:ale_c_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized -fsanitize=address -fno-omit-frame-pointer "
 let g:ale_c_clangtidy_options=""
 let g:ale_c_clangtidy_extra_options="-checks=*"
 let g:ale_c_cppcheck_options="--enable=all -v --std=c99 --force"
@@ -188,7 +187,6 @@ let g:ale_c_cppcheck_options="--enable=all -v --std=c99 --force"
 let g:ale_cpp_clang_executable="clang-8"
 let g:ale_cpp_clangtidy_executable="clang-tidy-8"
 let g:ale_cpp_gcc_options= " -std=c++17 -Wall -Werror -pipe -Wpedantic -Wextra -Wwrite-strings -Wformat-nonliteral -Wformat-security -Wbad-function-cast -Wcast-qual -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wshadow -fsanitize=undefined -fsanitize=address -Wmissing-format-attribute -Winline -Wmissing-format-attribute "
-let g:ale_cpp_clang_options= "-Wpedantic -Wextra -Wmissing-prototypes -Wshadow -Wsometimes-uninitialized -fsanitize=address -fno-omit-frame-pointer "
 let g:ale_cpp_clangtidy_extra_options="-checks=*,-fuchsia-default-arguments,-readability-static-accessed-through-instance,-llvm-include-order,-llvm-header-guard"
 "*,-cert-dcl03-c,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-non-private-member-variables-in-classes,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-fuchsia-multiple-inheritance,-fuchsia-overloaded-operator,-fuchsia-statically-constructed-objects,-google-runtime-references,-hicpp-no-array-decay,-hicpp-static-assert,-misc-non-private-member-variables-in-classes,-misc-static-assert,-modernize-use-default-member-init,-readability-const-return-type,-readability-else-after-return,-readability-magic-numbers,-readability-named-parameter
 let g:ale_cpp_cppcheck_options="--enable=all --std=c++17 --force"
@@ -199,7 +197,11 @@ let g:ale_c_parse_makefile=1
 let g:ale_c_parse_compile_commands=1
 let g:ale_c_clangformat_options= "--style=file --fallback-style=google"
 
-let g:ale_python_flake8_options= "--ignore=E221,E501" " Ignore
+" Python3
+" ignore:
+"   - E221: multiple spaces before operator
+"   - E501: line too long
+let g:ale_python_flake8_options="--ignore=E221,E501"
 
 "let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1

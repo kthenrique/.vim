@@ -2,6 +2,7 @@
     "coc": {
         "preferences": {
             "extensionsUpdateCheck":"daily",
+            "enableFloatHighlight": true,
             "diagnostic": {
                 "displayByAle":true,
                 "virtualText":true
@@ -12,7 +13,8 @@
     "python": {
         "setInterpreter":"/usr/bin/python3",
         "linting": {
-            "enabled":true
+            "enabled":true,
+            "pylintEnabled": true
         },
         "plugins": {
             "jedi_completion": {
@@ -65,14 +67,19 @@
         "engines": ["bing", "google"]
     },
 
-    "cSpell.enabled": true,
-    "cSpell.enabledLanguageIds": ["asciidoc","text","git-commit"],
-    "cSpell.showStatus": false,
-    "cSpell.words": [],
-    "cSpell.allowCompoundWords": true,
-    "cSpell.ignoreWords": ["behaviour"],
-    "cSpell.userWords": [],
-    "cSpell.spellCheckDelayMs":50,
+    "cSpell": {
+        "enabled": true,
+        "showStatus": false,
+        "enabledLanguageIds": ["sh", "c", "cpp", "python", "text", "asciidoc"],
+        "includeRegExpList": ["string", "CStyleComment", "#.*"],
+        "maxNumberOfProblems": 100,
+        "numSuggestions": 8,
+        "words": [],
+        "allowCompoundWords": true,
+        "ignoreWords": ["kelve"],
+        "userWords": [],
+        "spellCheckDelayMs":50
+    },
 
     "languageserver": {
         "ccls": {
@@ -87,6 +94,10 @@
                     "onSave": 0,
                     "onChange": 1000,
                     "onOpen": 0
+                },
+                "clang": {
+                    "resourceDir": "/usr/lib/llvm-8/lib/clang/8.0.0",
+                    "extraArgs": ["-Wall", "-Wpedantic", "-Wextra", "-Wmissing-prototypes", "-Wshadow", "-Iinclude", "-Iinc", "-Wsometimes-uninitialized", "-fsanitize=address", "-fno-omit-frame-pointer", "-g"]
                 }
             }
         },
@@ -110,19 +121,21 @@
         }
     },
 
-    "java.referencesCodeLens.enabled": true,
-    "java.implementationsCodeLens.enabled": true,
+    "java": {
+        "referencesCodeLens.enabled": true,
+        "implementationsCodeLens.enabled": true,
 
-    "java.signatureHelp.enabled": true,
-    "java.progressReports.enabled": true,
+        "signatureHelp.enabled": true,
+        "progressReports.enabled": true,
 
-    "java.codeGeneration.generateComments": true,
-    "java.codeGeneration.useBlocks": true,
+        "codeGeneration.generateComments": true,
+        "codeGeneration.useBlocks": true,
 
-    "java.format.enabled": true,
-    "java.format.comments.enabled": true,
-    "java.format.onType.enabled": true,
+        "format.enabled": true,
+        "format.comments.enabled": true,
+        "format.onType.enabled": true,
 
-    "java.completion.enabled": true,
-    "java.foldingRange.enabled": true
+        "completion.enabled": true,
+        "foldingRange.enabled": true
+    }
 }
