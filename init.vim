@@ -351,6 +351,7 @@ let g:tagbar_compact = 1
 
 " ================================================================================= NERDTREE
 map <silent> <F2> :NERDTreeToggle<CR>
+let NERDTreeAutoDeleteBuffer=1
 
 " ================================================================================== HEXMODE
 nnoremap <Leader>h :Hexmode<CR>
