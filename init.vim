@@ -6,6 +6,8 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
+Plug 'https://github.com/richq/vim-cmake-completion.git'
+Plug 'octol/vim-cpp-enhanced-highlight'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -285,9 +287,10 @@ let g:lightline = {
       \ }
 
 let g:lightline.inactive = {
-	\ 'left': [ [ 'filename' ] ],
+	\ 'left':  [ [ 'filename' ],
+    \            [ 'tagbar'   ] ],
 	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent' ] ]
+	\            [ 'percent'  ] ]
     \}
 
 let g:lightline.tabline = {
@@ -467,6 +470,13 @@ set smartcase "don't ignore case if Upper Case letters appear in search
 
 " Set the highlight for line number
 set cul
+
+" =========================================================================== CPP HIGHLIGHTS
+"let g:cpp_class_scope_highlight = 1
+"let g:cpp_class_decl_highlight = 1
+"let g:cpp_member_variable_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_concepts_highlight = 1
 
 " ================================================================================= MAPPINGS
 imap <silent> <C-S>			<C-O>:update<CR>
