@@ -8,6 +8,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'https://github.com/richq/vim-cmake-completion.git'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'nfnty/vim-nftables'
+"Plug 'ryanoasis/vim-devicons'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -80,16 +82,20 @@ let g:coc_global_extensions=[
             \ 'coc-rls',
             \ 'coc-java',
             \ 'coc-python',
+            \ 'coc-texlab',
+            \ 'coc-docker',
             \ 'coc-json',
             \ 'coc-xml',
             \ 'coc-html',
-            \ 'coc-texlab',
-            \ 'coc-docker',
+            \ 'coc-css',
+            \ 'coc-eslint',
+            \ 'coc-tsserver',
             \ 'coc-spell-checker',
             \ 'coc-translator',
             \ 'coc-marketplace',
             \ ]
 
+" 'coc-explorer',
 " For diagnostic messages
 set updatetime=300
 
@@ -153,12 +159,12 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
   \   'c'         : ['gcc', 'clangtidy', 'flawfinder'],
   \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'python'    : ['flake8', 'bandit'],
+  \   'python'    : ['flake8', 'bandit', 'pylint'],
   \   'verilog'   : ['iverilog'],
   \   'java'      : ['checkstyle'],
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
-  \   'sh'        : ['shellcheck'],
+  \   'sh'        : ['language_server', 'shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
   \}
@@ -203,7 +209,8 @@ let g:ale_c_clangformat_options= "--style=file --fallback-style=google"
 " ignore:
 "   - E221: multiple spaces before operator
 "   - E501: line too long
-let g:ale_python_flake8_options="--ignore=E221,E501"
+"   - N802: function name should be lowercase
+let g:ale_python_flake8_options="--ignore=E221,E501,N802"
 
 "let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
@@ -365,6 +372,7 @@ let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
 " ============================================================================== COLORSCHEME
 set termguicolors     " enable true colors support
 set background=dark
+"set background=light
 colo gruvbox
 
 " ============================================================================ SET SKELETONS
@@ -383,6 +391,7 @@ autocmd BufNewFile  *.h	           0r ~/.config/nvim/skeleton/skeleton_doxy.h
 "autocmd BufNewFile  *.h	           0r ~/.config/nvim/skeleton/skeleton.h
 autocmd BufNewFile  *.adoc         0r ~/.config/nvim/skeleton/skeleton.adoc
 autocmd BufNewFile  *.py           0r ~/.config/nvim/skeleton/skeleton.py
+autocmd BufNewFile  *.sh           0r ~/.config/nvim/skeleton/skeleton.sh
 
 autocmd BufNewFile  *.pro          0r ~/.config/nvim/skeleton/skeleton.pro
 autocmd BufNewFile  .gitignore     0r ~/.config/nvim/skeleton/skeleton.gitignore
