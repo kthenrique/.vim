@@ -6,9 +6,6 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
-Plug 'https://github.com/richq/vim-cmake-completion.git'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'nfnty/vim-nftables'
 "Plug 'ryanoasis/vim-devicons'
 " ================== EXPERIMENTAL ====================
 
@@ -17,22 +14,23 @@ Plug 'mhinz/vim-startify'                                      " STARTIFY       
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC              : Language client
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
+
+"Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
+Plug 'nfnty/vim-nftables'                                      " NFTABLES         : nft syntax highlighting
+
+Plug 'iamcco/markdown-preview.nvim',
+            \ { 'do': { -> mkdp#util#install() } }              " MARKDOWN-PREVIEW : live previewing markdown
 "Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
 "Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
 
-Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
-
-"Plug 'https://github.com/SirVer/ultisnips.git'                 " ULTISNIPS        : snippets engine
-  "Plug 'https://github.com/honza/vim-snippets.git'             " Snippets
-"Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
 Plug 'https://github.com/nelstrom/vim-visual-star-search.git'  " VISUAL-STAR      : search words in visual
-"Plug 'https://github.com/godlygeek/tabular.git'                " TABULAR          : text filtering and alignment
 
 Plug 'scrooloose/nerdtree'                                     " NERDTREE         : file explorer
-  Plug 'Xuyuanp/nerdtree-git-plugin'                           " GIT SYMBOLS
+  Plug 'Xuyuanp/nerdtree-git-plugin'                             " GIT SYMBOLS
+Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS         : update tags automatically
 Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags & code symbols
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
@@ -40,6 +38,8 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER      
 
 " Initialize plugin system
 call plug#end()
+
+" ============================================================================= EXPERIMENTAL
 
 " ================================================================================= STARTIFY
 " Automatically update sessions
@@ -87,25 +87,17 @@ let g:coc_global_extensions=[
             \ 'coc-json',
             \ 'coc-xml',
             \ 'coc-html',
+            \ 'coc-emmet',
             \ 'coc-css',
             \ 'coc-eslint',
             \ 'coc-tsserver',
             \ 'coc-spell-checker',
-            \ 'coc-translator',
             \ 'coc-marketplace',
             \ ]
 
 " 'coc-explorer',
 " For diagnostic messages
 set updatetime=300
-
-" =========================================================================== COC-TRANSLATOR
-" popup
-nmap <Leader>t <Plug>(coc-translator-p)
-" echo
-nmap <Leader>e <Plug>(coc-translator-e)
-" replace
-nmap <Leader>r <Plug>(coc-translator-r)
 
 " =============================================================================== GRAMMAROUS
 let g:grammarous#show_first_error=0   " see the first error in a info window soon after the check
@@ -167,6 +159,9 @@ let g:ale_linters = {
   \   'sh'        : ['shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
+  \   'html'      : ['fecs'],
+  \   'css'       : ['fecs'],
+  \   'javascript': ['fecs'],
   \}
 
 let g:ale_fixers = {
@@ -176,6 +171,8 @@ let g:ale_fixers = {
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'python': ['remove_trailing_lines', 'trim_whitespace'],
   \   'java'  : ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
+  \   'json'  : ['fixjson'],
+  \   'html'  : ['prettier', 'fecs'],
   \}
 
 " Java

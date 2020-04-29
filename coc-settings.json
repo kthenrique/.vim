@@ -10,11 +10,14 @@
         }
     },
 
+    "eslint": {
+        "filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"]
+    },
+
     "python": {
         "setInterpreter":"/usr/bin/python3",
         "linting": {
-            "enabled":true,
-            "pylintEnabled": true
+            "enabled":true
         },
         "plugins": {
             "jedi_completion": {
