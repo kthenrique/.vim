@@ -164,7 +164,7 @@ let g:ale_linters = {
   \   'java'      : ['checkstyle'],
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
-  \   'sh'        : ['language_server', 'shellcheck'],
+  \   'sh'        : ['shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
   \}
@@ -248,9 +248,12 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " ================================================================================= GEN-TAGS
 let g:gen_tags#gtags_auto_gen=1
 let g:gen_tags#gtags_auto_update=1
+let g:gen_tags#ctags_opts='-c -a -d --verbose'
+
 let g:gen_tags#ctags_auto_gen=1
 let g:gen_tags#ctags_auto_update=1
 
+let g:gen_tags#statusline=1
 "" Disable preview on Scratch of Omnifunction
 "set completeopt-=preview
 
@@ -263,8 +266,8 @@ set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
+      \   'right': [ [ 'buffernr' ],
+      \              [ 'lineinfo', 'percent' ],
       \              [ 'fileencoding', 'filetype' ],
       \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
       \   'left':  [ [ 'mode', 'paste', 'coc' ],
@@ -288,6 +291,7 @@ let g:lightline = {
       \ },
       \ 'component': {
       \   'tagbar'   : '%{tagbar#currenttag("[%s]", "", "f")}',
+      \   'buffernr' : '%{bufnr("%")}',
       \ },
       \ 'separator'    : { 'left' : '', 'right'      : '' },
       \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" }
@@ -537,6 +541,7 @@ noremap <A-6> 6gt
 noremap <A-7> 7gt
 noremap <A-8> 8gt
 noremap <A-9> 9gt
+noremap <A-0> 10gt
 
 " browsing splits
 nnoremap <c-j> <c-w>j
