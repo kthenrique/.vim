@@ -6,7 +6,6 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
-"Plug 'ryanoasis/vim-devicons'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -89,8 +88,6 @@ let g:coc_global_extensions=[
             \ 'coc-html',
             \ 'coc-emmet',
             \ 'coc-css',
-            \ 'coc-eslint',
-            \ 'coc-tsserver',
             \ 'coc-spell-checker',
             \ 'coc-marketplace',
             \ ]
