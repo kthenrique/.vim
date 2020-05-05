@@ -259,14 +259,21 @@ set noshowmode
 " solarized light, PaperColor light, seoul256, one, landscape
 let g:lightline = {
       \ 'colorscheme': 'one',
-      \ 'active': {
-      \   'right': [ [ 'buffernr' ],
-      \              [ 'lineinfo', 'percent' ],
-      \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
-      \   'left':  [ [ 'mode', 'paste', 'coc' ],
-      \              [ 'readonly', 'spell', 'tagbar' ] ]
-      \ },
+      \ 'separator'    : { 'left' : '', 'right'      : '' },
+      \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" },
+      \ 'mode_map' : {
+      \   'n'      : "\u2115",
+      \   'i'      : "\U1d540",
+      \   'R'      : "\u211d",
+      \   'v'      : "\U1d54d",
+      \   'V'      : "\U1d54d-\U1d543",
+      \   "\<C-v>" : "\U1d54d-\U1d539",
+      \   'c'      : "\u2102",
+      \   's'      : "\U1d54a",
+      \   'S'      : "\U1d54a-\U1d543",
+      \   "\<C-s>" : "\U1d54a-\U1d539",
+      \   't'      : "\U1d54b",
+      \   },
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \   'cocstatus': 'coc#status',
@@ -287,8 +294,18 @@ let g:lightline = {
       \   'tagbar'   : '%{tagbar#currenttag("[%s]", "", "f")}',
       \   'buffernr' : '%{bufnr("%")}',
       \ },
-      \ 'separator'    : { 'left' : '', 'right'      : '' },
-      \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" }
+      \ 'tabline': {
+      \   'left': [ [ 'tabs' ] ],
+      \   'right': [ [  ] ] 
+      \ },
+      \ 'active': {
+      \   'right': [ [ 'buffernr' ],
+      \              [ 'lineinfo', 'percent' ],
+      \              [ 'fileencoding', 'filetype' ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
+      \   'left':  [ [ 'mode', 'paste', 'coc' ],
+      \              [ 'readonly', 'spell', 'tagbar' ] ]
+      \ },
       \ }
 
 let g:lightline.inactive = {
@@ -297,10 +314,6 @@ let g:lightline.inactive = {
 	\ 'right': [ [ 'lineinfo' ],
 	\            [ 'percent'  ] ]
     \}
-
-let g:lightline.tabline = {
-	\ 'left': [ [ 'tabs' ] ],
-	\ 'right': [ [  ] ] }
 
 " ARDUINO - [arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
 function! LightlineArduino()
@@ -325,20 +338,6 @@ function! LightlineMode()
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-
-let g:lightline.mode_map = {
-    \ 'n' : "\u2115",
-    \ 'i' : "\U1d540",
-    \ 'R' : "\u211d",
-    \ 'v' : "\U1d54d",
-    \ 'V' : "\U1d54d-\U1d543",
-    \ "\<C-v>": "\U1d54d-\U1d539",
-    \ 'c' : "\u2102",
-    \ 's' : "\U1d54a",
-    \ 'S' : "\U1d54a-\U1d543",
-    \ "\<C-s>": "\U1d54a-\U1d539",
-    \ 't': "\U1d54b",
-    \ }
 
 " ============================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
