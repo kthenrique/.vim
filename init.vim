@@ -6,6 +6,7 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
+Plug 'octol/vim-cpp-enhanced-highlight'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -306,14 +307,13 @@ let g:lightline = {
       \   'left':  [ [ 'mode', 'paste', 'coc' ],
       \              [ 'readonly', 'spell', 'tagbar' ] ]
       \ },
+      \ 'inactive': {
+	  \   'left':  [ [ 'filename' ],
+      \              [ 'tagbar'   ] ],
+	  \   'right': [ [ 'buffernr'  ],
+	  \              [ 'lineinfo', 'percent' ]]
+      \ },
       \ }
-
-let g:lightline.inactive = {
-	\ 'left':  [ [ 'filename' ],
-    \            [ 'tagbar'   ] ],
-	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent'  ] ]
-    \}
 
 " ARDUINO - [arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
 function! LightlineArduino()
