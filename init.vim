@@ -15,7 +15,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC            
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
 
-"Plug 'https://github.com/stevearc/vim-arduino.git'             " VIM-ARDUINO      : arduino ide
 Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
 Plug 'nfnty/vim-nftables'                                      " NFTABLES         : nft syntax highlighting
 
@@ -34,7 +33,6 @@ Plug 'jsfaint/gen_tags.vim'                                    " GEN-TAGS       
 Plug 'https://github.com/majutsushi/tagbar.git'                " TAGBAR           : bar with tags & code symbols
 Plug 'https://github.com/morhetz/gruvbox.git'                  " GRUVBOX          : colorscheme
 Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE        : Statusline
-Plug 'https://github.com/airblade/vim-gitgutter.git'           " GITGUTTER        : show symbols from git on the left
 
 " Initialize plugin system
 call plug#end()
@@ -79,16 +77,15 @@ endfunction
 nmap <leader>cr  <Plug>(coc-rename)
 
 let g:coc_global_extensions=[
-            \ 'coc-rls',
-            \ 'coc-java',
+            \ 'coc-git',
+            \ 'coc-docker',
             \ 'coc-python',
             \ 'coc-texlab',
-            \ 'coc-docker',
             \ 'coc-json',
             \ 'coc-xml',
             \ 'coc-html',
-            \ 'coc-emmet',
             \ 'coc-css',
+            \ 'coc-emmet',
             \ 'coc-spell-checker',
             \ 'coc-marketplace',
             \ ]
@@ -216,30 +213,11 @@ let g:lightline#ale#indicator_warnings = "\uf071: "
 let g:lightline#ale#indicator_errors   = "\uf05e: "
 let g:lightline#ale#indicator_ok       = "\uf00c"
 
-" ================================================================================ ULTISNIPS
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
- let g:UltiSnipsExpandTrigger       = "<c-space>"
- let g:UltiSnipsJumpForwardTrigger  = "<tab>"
- let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
+" ========================================================================= MARKDOWN-PREVIEW
+let g:mkdp_command_for_global = 1
+let g:mkdp_preview_options = {
+    \ 'sync_scroll_type': 'relative',
+    \ }
 " ================================================================================= GEN-TAGS
 let g:gen_tags#gtags_auto_gen=1
 let g:gen_tags#gtags_auto_update=1
@@ -259,6 +237,20 @@ set noshowmode
 " Possible colorschemes: jellybeans, gruvbox, powerline[default], wombat, solarized dark,
 " solarized light, PaperColor light, seoul256, one, landscape
 let g:lightline = {
+      \ 'active': {
+      \   'right': [ [ 'buffernr' ],
+      \              [ 'lineinfo', 'percent' ],
+      \              [ 'fileencoding', 'filetype' ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
+      \   'left':  [ [ 'mode', 'paste', 'coc' ],
+      \              [ 'readonly', 'spell', 'tagbar' ] ]
+      \ },
+      \ 'inactive': {
+	  \   'left':  [ [ 'filename' ],
+      \              [ 'tagbar'   ] ],
+	  \   'right': [ [ 'buffernr'  ],
+	  \              [ 'lineinfo', 'percent' ]]
+      \ },
       \ 'colorscheme': 'one',
       \ 'separator'    : { 'left' : '', 'right'      : '' },
       \ 'subseparator' : { 'left' : "\u25c9", 'right' : "\u25c9" },
@@ -299,31 +291,7 @@ let g:lightline = {
       \   'left': [ [ 'tabs' ] ],
       \   'right': [ [  ] ] 
       \ },
-      \ 'active': {
-      \   'right': [ [ 'buffernr' ],
-      \              [ 'lineinfo', 'percent' ],
-      \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
-      \   'left':  [ [ 'mode', 'paste', 'coc' ],
-      \              [ 'readonly', 'spell', 'tagbar' ] ]
-      \ },
-      \ 'inactive': {
-	  \   'left':  [ [ 'filename' ],
-      \              [ 'tagbar'   ] ],
-	  \   'right': [ [ 'buffernr'  ],
-	  \              [ 'lineinfo', 'percent' ]]
-      \ },
       \ }
-
-" ARDUINO - [arduino:avr:uno] [arduino:usbtinyisp] (/dev/ttyACM0:9600)
-function! LightlineArduino()
-  let port = arduino#GetPort()
-  let line = '[' . g:arduino_board . '] [' . g:arduino_programmer . ']'
-  if !empty(port)
-    let line = line . ' (' . port . ':' . g:arduino_serial_baud . ')'
-  endif
-  return line
-endfunction
 
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
@@ -338,6 +306,8 @@ function! LightlineMode()
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+call lightline#toggle()
 
 " ============================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
@@ -380,6 +350,7 @@ autocmd BufNewFile  *.v            0r ~/.config/nvim/skeleton/skeleton.v
 autocmd BufNewFile  *.asm          0r ~/.config/nvim/skeleton/skeleton.asm
 autocmd BufNewFile  *.s            0r ~/.config/nvim/skeleton/skeleton.asm
 autocmd BufNewFile  *.java	       0r ~/.config/nvim/skeleton/skeleton_doc.java
+autocmd BufNewFile  *.html	       0r ~/.config/nvim/skeleton/skeleton.html
 "autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton.cpp
 autocmd BufNewFile  *.cpp	       0r ~/.config/nvim/skeleton/skeleton_doxy.cpp
 "autocmd BufNewFile  *.c	           0r ~/.config/nvim/skeleton/skeleton.c
@@ -446,7 +417,7 @@ set backspace=indent,eol,start
 
 " ========================================================================== SET INDENTATION
 set autoindent      " align the new line indent with the previous line
-set textwidth  =90  " max character in a line before auto breaking
+set textwidth  =80  " max character in a line before auto breaking
 set tabstop    =4   " number of spaces inserted per tab
 set shiftwidth =4   " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
