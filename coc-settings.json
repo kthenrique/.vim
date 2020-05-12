@@ -1,13 +1,30 @@
 {
-    "coc": {
-        "preferences": {
-            "extensionsUpdateCheck":"daily",
-            "enableFloatHighlight": true,
-            "diagnostic": {
-                "displayByAle":true,
-                "virtualText":true
-            }
-        }
+    "coc.preferences.extensionsUpdateCheck":"daily",
+    "coc.preferences.enableFloatHighlight": true,
+    "diagnostic": {
+        "checkCurrentLine":true,
+        "displayByAle":true,
+        "virtualText":true,
+        "errorSign":"\uf05e",
+        "warningSign":"\uf071",
+        "hintSign":"\ufe15",
+        "infoSign":"\u2139"
+    },
+
+    "emmet.showAbbreviationSuggestions":true,
+
+    "git": {
+        "enableGutters":true,
+        "signOffset":99,
+        "addGBlameToVirtualText":false,
+        "addGBlameToBufferVar":true,
+        "virtualTextPrefix":"⇝ ",
+        "branchCharacter":"\uf418",
+        "addedSign.text":"▏",
+        "changedSign.text":"▏",
+        "removedSign.text":"▏",
+        "topRemovedSign.text":"⊝",
+        "changeRemovedSign.text":"≃"
     },
 
     "python": {

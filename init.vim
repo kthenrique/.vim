@@ -241,7 +241,8 @@ let g:lightline = {
       \   'right': [ [ 'buffernr' ],
       \              [ 'lineinfo', 'percent' ],
       \              [ 'fileencoding', 'filetype' ],
-      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ], [ 'cocstatus' ] ],
+      \              [ 'linter_checking', 'linter_warnings', 'linter_errors', 'linter_ok' ],
+      \              [ 'cocstatus', 'blame' ] ],
       \   'left':  [ [ 'mode', 'paste', 'coc' ],
       \              [ 'readonly', 'spell', 'tagbar' ] ]
       \ },
@@ -270,6 +271,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \   'cocstatus': 'coc#status',
+      \   'blame': 'LightlineGitBlame',
       \ },
       \ 'component_expand': {
       \   'linter_checking' : 'lightline#ale#checking',
@@ -307,7 +309,11 @@ function! LightlineMode()
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-call lightline#toggle()
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
 
 " ============================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
