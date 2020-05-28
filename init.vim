@@ -154,9 +154,7 @@ let g:ale_linters = {
   \   'sh'        : ['shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
-  \   'html'      : ['fecs'],
-  \   'css'       : ['fecs'],
-  \   'javascript': ['fecs'],
+  \   'matlab'    : ['mlint'],
   \}
 
 let g:ale_fixers = {
@@ -167,7 +165,7 @@ let g:ale_fixers = {
   \   'python': ['remove_trailing_lines', 'trim_whitespace'],
   \   'java'  : ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
   \   'json'  : ['fixjson'],
-  \   'html'  : ['prettier', 'fecs'],
+  \   'html'  : ['prettier'],
   \}
 
 " Java
@@ -423,7 +421,7 @@ set backspace=indent,eol,start
 
 " ========================================================================== SET INDENTATION
 set autoindent      " align the new line indent with the previous line
-set textwidth  =80  " max character in a line before auto breaking
+set textwidth  =70  " max character in a line before auto breaking
 set tabstop    =4   " number of spaces inserted per tab
 set shiftwidth =4   " number of spaces to indent after a line is broken
 set expandtab       " insert spaces when tab is pressed
