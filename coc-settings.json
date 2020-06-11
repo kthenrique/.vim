@@ -122,7 +122,7 @@
             "command": "bash-language-server",
             "args": ["start"],
             "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
+            "ignoredRootPaths": ["/home/henrique/"]
         },
 
         "cmake": {
