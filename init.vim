@@ -143,6 +143,7 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_linters_explicit = 1
 " Linters that should be enabled just before commits, because of their overhead:
 "   - c/c++ : 'cppcheck',
+"   - sh    : 'shellcheck',
 let g:ale_linters = {
   \   'c'         : ['gcc', 'clangtidy', 'flawfinder'],
   \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder'],
@@ -151,7 +152,6 @@ let g:ale_linters = {
   \   'java'      : ['checkstyle'],
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
-  \   'sh'        : ['shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
   \   'matlab'    : ['mlint'],
