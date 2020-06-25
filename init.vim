@@ -62,6 +62,8 @@ let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 " ====================================================================================== COC
 " gr - show a list of references made
 nmap <silent> gr <Plug>(coc-references)
+" gd - toggles between definition and declaration
+nmap <silent> gd <Plug>(coc-definition)
 
 " gh - get hint on whatever's under the cursor
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
@@ -152,6 +154,7 @@ let g:ale_linters = {
   \   'java'      : ['checkstyle'],
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
+  \   'lua'       : ['luac', 'luacheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
   \   'matlab'    : ['mlint'],
@@ -289,7 +292,7 @@ let g:lightline = {
       \ },
       \ 'tabline': {
       \   'left': [ [ 'tabs' ] ],
-      \   'right': [ [  ] ] 
+      \   'right': [ [  ] ]
       \ },
       \ }
 
@@ -464,17 +467,27 @@ imap <silent> <C-S>			<C-O>:update<CR>
 map <silent> <C-S>			<Esc>:update<CR>
 cmap <silent> <C-S>			:update<CR>
 
+" zoom in
+noremap zi :resize 900<CR>:vertical resize 900<CR>
+" zoom out
+noremap zo <C-w>=
+
 " Terminal
 function ST()
   execute "split"
   execute "terminal"
+  execute "norm! \<C-w>J<CR>"
   execute "res 10"
+  execute "set wfh"
+  execute "set wfw"
 endfunction
 
 function VT()
   execute "vsplit"
   execute "terminal"
 "  execute "vertical res 50"
+  execute "set wfh"
+  execute "set wfw"
 endfunction
 
 function TT()
