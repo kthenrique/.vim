@@ -5,6 +5,5 @@
 " Sets English as language for spell
 set spelllang=en
 set spell
-set textwidth=90   " max character in a line before auto breaking
 
 let g:gutentags_enabled=0
