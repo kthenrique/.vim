@@ -11,8 +11,6 @@
         "infoSign":"\u2139"
     },
 
-    "emmet.showAbbreviationSuggestions":true,
-
     "git": {
         "enableGutters":true,
         "signOffset":99,
@@ -78,16 +76,19 @@
     "codeLens": {
         "enable":false
     },
-    "translator": {
-        "toLang": "en",
-        "engines": ["bing", "google"]
-    },
 
     "cSpell": {
         "enabled": true,
+        "language": "en",
         "showStatus": false,
-        "enabledLanguageIds": ["sh", "c", "cpp", "python", "text", "asciidoc"],
+        "enabledLanguageIds": ["sh", "c", "cpp", "python", "text", "asciidoc", "latex", "tex", "markdown"],
         "includeRegExpList": ["string", "CStyleComment", "#.*"],
+        "languageSettings": [
+            { "languageId": "markdown", "includeRegExpList": ["Everything"] },
+            { "languageId": "asciidoc", "includeRegExpList": ["Everything"] },
+            { "languageId": "text", "includeRegExpList": ["Everything"] },
+            { "languageId": "tex", "includeRegExpList": ["Everything"] }
+        ],
         "maxNumberOfProblems": 100,
         "numSuggestions": 8,
         "words": [],
