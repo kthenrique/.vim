@@ -7,6 +7,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'https://github.com/puremourning/vimspector'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -38,6 +40,25 @@ Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE      
 call plug#end()
 
 " ============================================================================= EXPERIMENTAL
+nmap <leader>dl :call vimspector#Launch()<CR>
+nmap <leader>dr :VimspectorReset<CR>
+nmap <leader>de :VimspectorEval
+nmap <leader>dw :VimspectorWatch
+nmap <leader>do :VimspectorShowOutput
+
+
+nmap <F6> <Plug>VimspectorContinue
+nmap <F7> <Plug>VimspectorStop
+nmap <F8> <Plug>VimspectorRestart
+nmap <F9> <Plug>VimspectorPause
+nmap <F10> <Plug>VimspectorToggleBreakpoint
+"nmap <F5> <Plug>VimspectorToggleConditionalBreakpoint
+"nmap <F5> <Plug>VimspectorAddFunctionBreakpoint
+nmap <F11> <Plug>VimspectorStepOver
+nmap <F12> <Plug>VimspectorStepInto
+"nmap <F5> <Plug>VimspectorStepOut
+
+nnoremap <silent> <C-F> :FZF<CR>
 
 " ================================================================================= STARTIFY
 " Automatically update sessions
@@ -64,6 +85,8 @@ let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 nmap <silent> gr <Plug>(coc-references)
 " gd - toggles between definition and declaration
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 
 " gh - get hint on whatever's under the cursor
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
@@ -80,14 +103,12 @@ nmap <leader>cr  <Plug>(coc-rename)
 
 let g:coc_global_extensions=[
             \ 'coc-git',
-            \ 'coc-docker',
             \ 'coc-python',
             \ 'coc-texlab',
             \ 'coc-json',
             \ 'coc-xml',
             \ 'coc-html',
             \ 'coc-css',
-            \ 'coc-emmet',
             \ 'coc-spell-checker',
             \ 'coc-marketplace',
             \ ]
@@ -221,11 +242,11 @@ let g:mkdp_preview_options = {
     \ }
 " ================================================================================= GEN-TAGS
 let g:gen_tags#gtags_auto_gen=1
-let g:gen_tags#gtags_auto_update=1
+let g:gen_tags#gtags_auto_update=0
 let g:gen_tags#ctags_opts='-c -a -d --verbose'
 
 let g:gen_tags#ctags_auto_gen=1
-let g:gen_tags#ctags_auto_update=1
+let g:gen_tags#ctags_auto_update=0
 
 let g:gen_tags#statusline=1
 "" Disable preview on Scratch of Omnifunction
