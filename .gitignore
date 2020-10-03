@@ -22,3 +22,6 @@ bundle/
 
 # vim
 .netrwhist
+
+# spells DB
+spell/
