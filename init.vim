@@ -530,8 +530,8 @@ command! TT call TT()
 command! TSC call TSC()
 
 " Escape
-map  ßß <Esc>
-map! ßß <Esc>
+map  -- <Esc>
+map! -- <Esc>
 
 " switching tabs
 noremap <A-1> 1gt

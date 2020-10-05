@@ -3,7 +3,7 @@
     "coc.preferences.enableFloatHighlight": true,
     "diagnostic": {
         "checkCurrentLine":true,
-        "displayByAle":true,
+        "displayByAle":false,
         "virtualText":true,
         "errorSign":"\uf05e",
         "warningSign":"\uf071",
