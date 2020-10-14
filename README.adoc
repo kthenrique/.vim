@@ -1,7 +1,7 @@
 = NEOVIM SETUP
 :Author: Kelve T. Henrique 
 :Email: kelvehenrique@pm.me
-:Date: 2020 Jan 20
+:Date: 2020 Oct 14
 :description: Steps to setup neovim in new Ubuntu machines
 
 Personal Neovim setup.
@@ -18,7 +18,7 @@ Personal Neovim setup.
 === Linters & Fixers
   - C/C++:
      * sudo snap ccls --classic # It's better to build it manually
-     * sudo apt install clang-8 clang-tools-8 clang-format-8 clang-tidy-8
+     * sudo apt install clang-10 clang-tools-10 clang-format-10 clang-tidy-10
      * sudo apt install flawfinder
   
   - Python3:
