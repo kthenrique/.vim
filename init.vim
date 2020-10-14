@@ -9,6 +9,8 @@ Plug 'arithran/vim-delete-hidden-buffers'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'https://github.com/puremourning/vimspector'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/skywind3000/vim-cppman'
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -40,6 +42,13 @@ Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE      
 call plug#end()
 
 " ============================================================================= EXPERIMENTAL
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
+nnoremap <silent> <C-F> :Files<CR>
+let g:fzf_preview_window = 'up:60%'
+
+au BufEnter *.c :set keywordprg=:Man
+au BufEnter *.cpp :set keywordprg=:Cppman
+au BufEnter *.hpp :set keywordprg=:Cppman
 nmap <leader>dl :call vimspector#Launch()<CR>
 nmap <leader>dr :VimspectorReset<CR>
 nmap <leader>de :VimspectorEval
@@ -57,8 +66,6 @@ nmap <F10> <Plug>VimspectorToggleBreakpoint
 nmap <F11> <Plug>VimspectorStepOver
 nmap <F12> <Plug>VimspectorStepInto
 "nmap <F5> <Plug>VimspectorStepOut
-
-nnoremap <silent> <C-F> :FZF<CR>
 
 " ================================================================================= STARTIFY
 " Automatically update sessions
@@ -169,7 +176,7 @@ let g:ale_linters_explicit = 1
 "   - sh    : 'shellcheck',
 let g:ale_linters = {
   \   'c'         : ['gcc', 'clangtidy', 'flawfinder'],
-  \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder'],
+  \   'cpp'       : ['gcc', 'clangtidy', 'flawfinder', 'cppcheck'],
   \   'python'    : ['flake8', 'bandit', 'pylint'],
   \   'verilog'   : ['iverilog'],
   \   'java'      : ['checkstyle'],
@@ -198,23 +205,18 @@ let g:ale_java_google_java_format_executable="java"
 let g:ale_java_google_java_format_options="-jar /opt/google-java-format.jar"
 
 " C Options
-let g:ale_c_clang_executable="clang-8"
-let g:ale_c_clangtidy_executable="clang-tidy-8"
 let g:ale_c_gcc_options= " -Wall -Werror -pipe -Wpedantic -Wextra -Wwrite-strings -Wformat-nonliteral -Wformat-security -Wbad-function-cast -Wcast-qual -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wshadow -fsanitize=undefined -fsanitize=address -Wmissing-format-attribute -Winline -Wmissing-format-attribute "
 let g:ale_c_clangtidy_options=""
 let g:ale_c_clangtidy_extra_options="-checks=*"
 let g:ale_c_cppcheck_options="--enable=all -v --std=c99 --force"
 
 " Cpp Options
-let g:ale_cpp_clang_executable="clang-8"
-let g:ale_cpp_clangtidy_executable="clang-tidy-8"
 let g:ale_cpp_gcc_options= " -std=c++17 -Wall -Werror -pipe -Wpedantic -Wextra -Wwrite-strings -Wformat-nonliteral -Wformat-security -Wbad-function-cast -Wcast-qual -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wshadow -fsanitize=undefined -fsanitize=address -Wmissing-format-attribute -Winline -Wmissing-format-attribute "
-let g:ale_cpp_clangtidy_extra_options="-checks=*,-fuchsia-default-arguments,-readability-static-accessed-through-instance,-llvm-include-order,-llvm-header-guard"
-"*,-cert-dcl03-c,-cppcoreguidelines-avoid-magic-numbers,-cppcoreguidelines-non-private-member-variables-in-classes,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-fuchsia-multiple-inheritance,-fuchsia-overloaded-operator,-fuchsia-statically-constructed-objects,-google-runtime-references,-hicpp-no-array-decay,-hicpp-static-assert,-misc-non-private-member-variables-in-classes,-misc-static-assert,-modernize-use-default-member-init,-readability-const-return-type,-readability-else-after-return,-readability-magic-numbers,-readability-named-parameter
+let g:ale_cpp_clangtidy_extra_options="" " Use .clang-tidy files
+"-checks=*,-fuchsia-default-arguments,-readability-static-accessed-through-instance,-llvm-include-order,-llvm-header-guard"
 let g:ale_cpp_cppcheck_options="--enable=all --std=c++17 --force"
 
 " C & Cpp
-let g:ale_c_clangformat_executable="clang-format-8"
 let g:ale_c_parse_makefile=1
 let g:ale_c_parse_compile_commands=1
 let g:ale_c_clangformat_options= "--style=file --fallback-style=google"
@@ -236,10 +238,13 @@ let g:lightline#ale#indicator_errors   = "\uf05e: "
 let g:lightline#ale#indicator_ok       = "\uf00c"
 
 " ========================================================================= MARKDOWN-PREVIEW
+let g:mkdp_auto_close = 0
 let g:mkdp_command_for_global = 1
 let g:mkdp_preview_options = {
     \ 'sync_scroll_type': 'relative',
+    \ 'uml': '-tsvg',
     \ }
+
 " ================================================================================= GEN-TAGS
 let g:gen_tags#gtags_auto_gen=1
 let g:gen_tags#gtags_auto_update=0
