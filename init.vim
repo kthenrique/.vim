@@ -49,6 +49,7 @@ let g:fzf_preview_window = 'up:60%'
 au BufEnter *.c :set keywordprg=:Man
 au BufEnter *.cpp :set keywordprg=:Cppman
 au BufEnter *.hpp :set keywordprg=:Cppman
+
 nmap <leader>dl :call vimspector#Launch()<CR>
 nmap <leader>dr :VimspectorReset<CR>
 nmap <leader>de :VimspectorEval
@@ -165,7 +166,7 @@ let g:ale_sign_style_error   = "\u2b4d"
 let g:ale_sign_style_warning = "\ufe15"
 let g:ale_sign_info          = "\u2139"
 
-let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_cursor = 0
 let g:ale_virtualtext_prefix = " \u2b9e "
 
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
@@ -230,6 +231,9 @@ let g:ale_python_flake8_options="--ignore=E221,E501,N802"
 
 "let g:ale_fix_on_save=1
 "let g:ale_lint_on_save=1
+
+" BASH
+let g:ale_sh_shellcheck_options = '-x'
 
 " ============================================================================ LIGHTLINE-ALE
 let g:lightline#ale#indicator_checking = "\uf110 ..."
@@ -341,6 +345,9 @@ function! LightlineGitBlame() abort
   " return blame
   return winwidth(0) > 120 ? blame : ''
 endfunction
+
+call lightline#disable()
+call lightline#enable()
 
 " ============================================================================= DRAG VISUALS
 runtime plugin/dragvisuals.vim
@@ -505,7 +512,7 @@ function ST()
   execute "norm! \<C-w>J<CR>"
   execute "res 10"
   execute "set wfh"
-  execute "set wfw"
+  "execute set wfw"
 endfunction
 
 function VT()
@@ -535,8 +542,8 @@ command! TT call TT()
 command! TSC call TSC()
 
 " Escape
-map  -- <Esc>
-map! -- <Esc>
+map  '' <Esc>
+map! '' <Esc>
 
 " switching tabs
 noremap <A-1> 1gt

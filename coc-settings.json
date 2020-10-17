@@ -1,7 +1,14 @@
 {
-    "coc.preferences.extensionsUpdateCheck":"daily",
-    "coc.preferences.enableFloatHighlight": true,
+    "coc": {
+        "preferences.extensionsUpdateCheck":"daily",
+        "preferences.enableFloatHighlight": true,
+        "preferences.colorSupport": true,
+        "preferences.promptInput":true
+    },
+
     "diagnostic": {
+        "enable":true,
+        "refreshOnInsertMode":false,
         "checkCurrentLine":true,
         "displayByAle":false,
         "virtualText":false,
@@ -11,8 +18,48 @@
         "infoSign":"\u2139"
     },
 
-    "list.maxPreviewHeight":30,
-    "list.interactiveDebounceTime":200,
+    "list": {
+        "maxPreviewHeight":30,   
+        "interactiveDebounceTime":200
+    },
+
+    "suggest": {
+        "floatEnable":true,
+        "triggerAfterInsertEnter": false,
+        "timeout":100,
+        "snippetIndicator":" ⨁",
+        "maxCompleteItemCount": 20,
+        "maxPreviewWidth": 80,
+        "detailMaxLength": 30,
+        "completionItemKindLabels": {
+          "keyword":       "❄",
+          "variable":      "Ⓥ",
+          "value":         "χ",
+          "operator":      "♙",
+          "function":      "ƒ",
+          "reference":     "Ⓡ",
+          "constant":      "Ⓚ",
+          "method":        "μ",
+          "struct":        "🅂",
+          "class":         "ℂ",
+          "interface":     "Ⓘ",
+          "text":          "Ⓣ",
+          "enum":          "Ⓔ",
+          "enumMember":    "#",
+          "module":        "🤻",
+          "color":         "Ⓒ",
+          "property":      "ℙ",
+          "field":         "Ⓕ",
+          "unit":          "∪",
+          "event":         "🛱",
+          "file":          "📋",
+          "folder":        "🗀",
+          "snippet":       "🆘",
+          "typeParameter": "θ",
+          "default":       "?"
+        }
+    },
+
     "git": {
         "enableGutters":true,
         "signOffset":99,
@@ -71,10 +118,6 @@
         }
     },
 
-    "suggest": {
-        "timeout":1000,
-        "snippetIndicator":"\u24c8"
-    },
     "codeLens": {
         "enable":false
     },
