@@ -6,11 +6,11 @@ set t_Co=256
 call plug#begin('~/.local/share/nvim/plugged')
 " ================== EXPERIMENTAL ====================
 Plug 'arithran/vim-delete-hidden-buffers'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'https://github.com/puremourning/vimspector'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/skywind3000/vim-cppman'
+Plug 'https://github.com/skywind3000/vim-cppman', { 'for': 'cpp' }
 " ================== EXPERIMENTAL ====================
 
 Plug 'mhinz/vim-startify'                                      " STARTIFY         : fancy start screen
@@ -19,13 +19,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}                " COC            
 Plug 'w0rp/ale'                                                " ALE              : asynchronous lint engine
   Plug 'maximbaz/lightline-ale'                                  " LIGHTLINE-ALE    : lightline for ALE
 
-Plug 'https://github.com/kergoth/vim-bitbake.git'              " BITBAKE          : syntax check for the bitbake tool
-Plug 'nfnty/vim-nftables'                                      " NFTABLES         : nft syntax highlighting
+Plug 'https://github.com/kergoth/vim-bitbake.git', { 'for': 'bitbake' } " BITBAKE          : syntax check for the bitbake tool
+Plug 'nfnty/vim-nftables', { 'for': 'nftables' }               " NFTABLES         : nft syntax highlighting
 
 Plug 'iamcco/markdown-preview.nvim',
             \ { 'do': { -> mkdp#util#install() } }              " MARKDOWN-PREVIEW : live previewing markdown
 "Plug 'https://github.com/rhysd/vim-grammarous.git'             " GRAMMAROUS       : powerful grammar checker (LanguageTool)
-"Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
+Plug 'donRaphaco/neotex', { 'for': 'tex' }                     " NEOTEX           : latex live preview
 
 Plug 'https://github.com/fidian/hexmode.git'                   " HEXMODE          : editing binary files
 Plug 'https://github.com/shinokada/dragvisuals.vim.git'        " DRAGVISUALS      : move selection
@@ -42,9 +42,11 @@ Plug 'https://github.com/itchyny/lightline.vim.git'            " LIGHTLINE      
 call plug#end()
 
 " ============================================================================= EXPERIMENTAL
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
+let g:fzf_layout = { 'window': { 'width': 0.85, 'height': 0.85 } }
 nnoremap <silent> <C-F> :Files<CR>
-let g:fzf_preview_window = 'up:60%'
+command! -bang Commits call fzf#vim#commits({'options': '--preview-window up'}, <bang>0)
+let g:fzf_preview_window = 'up:85%'
+let g:fzf_commits_log_options = '--oneline --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cn"'
 
 au BufEnter *.c :set keywordprg=:Man
 au BufEnter *.cpp :set keywordprg=:Cppman
