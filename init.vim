@@ -78,7 +78,10 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_session_sort = 1
 let g:startify_session_before_save = [
     \ 'echo "Cleaning up before saving.."',
-    \ 'silent! NERDTreeTabsClose'
+    \ ':silent! tabdo NERDTreeClose',
+    \ ':silent! tabdo TagbarClose',
+    \ ':DeleteHiddenBuffers',
+    \ ':tabfirst'
     \ ]
 
 let g:startify_bookmarks = [
@@ -186,6 +189,7 @@ let g:ale_linters = {
   \   'rust'      : ['cargo', 'rls', 'rustc'],
   \   'vhdl'      : ['vcom'],
   \   'lua'       : ['luac', 'luacheck'],
+  \   'sh'        : ['shellcheck'],
   \   'dockerfile': ['hadolint'],
   \   'cmake'     : ['cmakelint'],
   \   'matlab'    : ['mlint'],
@@ -196,7 +200,7 @@ let g:ale_fixers = {
   \   'cmake' : ['remove_trailing_lines', 'trim_whitespace', 'cmakeformat'],
   \   'c'     : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
   \   'cpp'   : ['remove_trailing_lines', 'trim_whitespace', 'clang-format'],
-  \   'python': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'python': ['remove_trailing_lines', 'trim_whitespace', 'isort'],
   \   'java'  : ['remove_trailing_lines', 'trim_whitespace', 'google_java_format'],
   \   'json'  : ['fixjson'],
   \   'html'  : ['prettier'],
@@ -544,8 +548,8 @@ command! TT call TT()
 command! TSC call TSC()
 
 " Escape
-map  '' <Esc>
-map! '' <Esc>
+map  qq <Esc>
+map! qq <Esc>
 
 " switching tabs
 noremap <A-1> 1gt

@@ -28,7 +28,7 @@
         "triggerAfterInsertEnter": false,
         "timeout":100,
         "snippetIndicator":" ⨁",
-        "maxCompleteItemCount": 20,
+        "maxCompleteItemCount": 80,
         "maxPreviewWidth": 80,
         "detailMaxLength": 30,
         "completionItemKindLabels": {
